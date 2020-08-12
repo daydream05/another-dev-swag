@@ -14,6 +14,15 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    "gatsby-plugin-theme-ui",
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Poppins', 'Open Sans']
+        }
+      }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
