@@ -47,6 +47,21 @@ module.exports = {
         overlayDrafts: activeEnv === "development",
       },
     },
+    {
+      resolve: `gatsby-plugin-snipcart-advanced`,
+      options: {
+        version: "3.0.15",
+        publicApiKey: process.env.GATSBYSNIPCARTAPI_KEY, // use public api key here or in environment variable
+        defaultLang: "en",
+        openCartOnAdd: false,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-postcss`,
+      options: {
+        postCssPlugins: [require(`tailwindcss`)],
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
