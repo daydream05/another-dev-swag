@@ -3,7 +3,7 @@ const breakpoints = [
   "550px",
   "750px",
   "1000px",
-  "1200px",
+  "1280px",
   "1600px",
   "1920px",
 ]

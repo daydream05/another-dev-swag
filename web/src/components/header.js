@@ -1,42 +1,54 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
+import { Link } from "gatsby"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
+/** @jsx jsx */
+import { jsx, Container } from 'theme-ui'
+import { boxShadows, constants } from "../gatsby-plugin-theme-ui"
+import { breakpoints } from "../gatsby-plugin-theme-ui/breakpoints"
+import { mediaQueries } from "../gatsby-plugin-theme-ui/media-queries"
+
+
+export const Header = ({ siteTitle }) => {
+  return (
+    <header
+      sx={{
+        boxShadow: boxShadows.nav,
+        py: 3,
+        px: 3,
+        [mediaQueries.xl]: {
+          height: constants.headerHeight,
+          px: 5,
+          py: 0,
+        }
       }}
     >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
+      <Container
+        sx={{
+          maxWidth: breakpoints.xxxl,
+          height: `100%`,
+        }}
+      >
+        <div
+          sx={{
+            display: `flex`,
+            alignItems: `center`,
+            height: `100%`,
+            [mediaQueries.xl]: {
+            }
           }}
         >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
+          <Link
+            sx={{
+              fontFamily: `Montserrat`,
+              fontWeight: `bold`,
+              fontSize: 3,
+              textDecoration: `none`,
+              color: `inherit`,
+            }}
+            to="/"
+          >GrabASwag</Link>
+        </div>
+      </Container>
+    </header>
+  )
 }
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default Header

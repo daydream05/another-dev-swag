@@ -19,6 +19,10 @@ export const constants = {
   footerHeight: "450px",
 }
 
+export const boxShadows = {
+  nav: `0px 2px 8px rgba(0, 0, 0, 0.07);`,
+}
+
 const baseTheme = {
   lineHeights: {
     body: 1.625,
@@ -83,6 +87,17 @@ const baseTheme = {
       fonntFamily: `heading`,
       [mediaQueries.lg]: {
         fontSize: 4,
+      },
+    },
+  },
+  layout: {
+    container: {
+      large: {
+        maxWidth: breakpoints.xxxl,
+      },
+      text: {
+        maxWidth: "900px",
+        margin: "0 auto",
       },
     },
   },
