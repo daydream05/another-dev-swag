@@ -11,12 +11,14 @@ export const colors = {
   offWhite: `#FAFAFA`,
   greenAccent: `#4BDA88`,
   background: `white`,
-  text: `darkAccent`,
+  text: `#040E3F`,
+  primary: `#F5BE18`,
 }
 
 export const constants = {
   headerHeight: "96px",
   footerHeight: "450px",
+  bannerHeight: `56px`,
 }
 
 export const boxShadows = {
@@ -89,6 +91,9 @@ const baseTheme = {
         fontSize: 4,
       },
     },
+  },
+  sizes: {
+    container: breakpoints.xxxl,
   },
   layout: {
     container: {
