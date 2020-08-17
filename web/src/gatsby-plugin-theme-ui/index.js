@@ -33,13 +33,14 @@ const baseTheme = {
     body:
       'Open Sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     heading:
-      'Poppin, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+      'Poppins, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
   },
   styles: {
     root: {
       fontFamily: `body`,
       h1: {
         fontFamily: `heading`,
+        fontWeight: `bold`,
       },
       h2: {
         fontFamily: `heading`,

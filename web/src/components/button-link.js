@@ -28,7 +28,8 @@ const ButtonLink = ({ children, ...rest }) => {
         display: `flex`,
         alignItems: `center`,
         justifyContent: `center`,
-        fontWeight: `bold`,
+        fontWeight: `500`,
+        fontFamily: `heading`,
         maxWidth: `300px`,
         borderRadius: `6px`,
         "~ button, ~ a": {
@@ -38,6 +39,7 @@ const ButtonLink = ({ children, ...rest }) => {
           mt: 5,
         },
       }}
+      to='/'
       {...rest}
     >
       {children}

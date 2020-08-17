@@ -5,7 +5,7 @@ import createSchema from 'part:@sanity/base/schema-creator'
 import schemaTypes from 'all:part:@sanity/base/schema-type'
 
 // We import object and document schemas
-import blockContent from './blockContent'
+import blockContent from './blocks/blockContent'
 import category from './category'
 import post from './post'
 import author from './author'
@@ -15,6 +15,8 @@ import button from './objects/button'
 import page from './documents/page'
 import mainImage from './objects/mainImage'
 import figure from './objects/figure'
+import seo from './objects/seo'
+import product from './documents/product'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -37,5 +39,7 @@ export default createSchema({
     figure,
     heroWithImage,
     mainImage,
+    product,
+    seo
   ])
 })

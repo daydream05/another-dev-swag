@@ -62,7 +62,12 @@ export const HeroWithImage = ({ hero, height }) => {
             }
           }}
         >
-          <Container>
+          <Container
+            sx={{
+              ml: 0,
+              maxWidth: `450px`,
+            }}
+          >
             <BaseBlockContent
               blocks={hero?._rawContent}
               serializers={heroSerializers}

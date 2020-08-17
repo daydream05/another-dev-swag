@@ -40,7 +40,7 @@ export const heroSerializers = {
                 mt: 0,
                 mb: 3,
                 [mediaQueries.lg]: {
-                  fontSize: 6,
+                  fontSize: 7,
                 },
               }}
             >

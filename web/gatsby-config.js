@@ -19,7 +19,7 @@ module.exports = {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         google: {
-          families: ['Poppins', 'Open Sans']
+          families: ['Poppins:500,700', 'Open Sans']
         }
       }
     },
