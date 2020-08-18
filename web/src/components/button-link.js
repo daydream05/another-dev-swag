@@ -6,9 +6,10 @@ import { Link } from "gatsby"
 import theme from "../gatsby-plugin-theme-ui"
 import { mediaQueries } from "../gatsby-plugin-theme-ui/media-queries"
 
-const ButtonLink = ({ children, ...rest }) => {
+const ButtonLink = ({ children, variant, ...rest }) => {
   return (
     <Link
+      
       sx={{
         appearance: "none",
         display: "block",
@@ -31,6 +32,7 @@ const ButtonLink = ({ children, ...rest }) => {
         fontWeight: `500`,
         fontFamily: `heading`,
         maxWidth: `300px`,
+        variant: variant ? `buttons.${variant}` : null,
         borderRadius: `6px`,
         "~ button, ~ a": {
           mt: `0 !important`,

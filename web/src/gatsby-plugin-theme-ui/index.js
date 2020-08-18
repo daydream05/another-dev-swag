@@ -23,6 +23,7 @@ export const constants = {
 
 export const boxShadows = {
   nav: `0px 2px 8px rgba(0, 0, 0, 0.07);`,
+  button: `0px 7px 10px rgba(0, 0, 0, 0.03)`,
 }
 
 const baseTheme = {
@@ -38,21 +39,30 @@ const baseTheme = {
   styles: {
     root: {
       fontFamily: `body`,
+      lineHeight: 1,
+      p: {
+        lineHeight: 1.65,
+      },
       h1: {
         fontFamily: `heading`,
         fontWeight: `bold`,
+        fontSize: [5, 5, 5, 6],
       },
       h2: {
         fontFamily: `heading`,
+        fontSize: [4, 4, 4, 5],
       },
       h3: {
         fontFamily: `heading`,
+        fontSize: [3, 3, 3, 4],
       },
       h4: {
         fontFamily: `heading`,
+        fontSize: [3, 3, 3, 4],
       },
       h5: {
         fontFamily: `heading`,
+        fontSize: [3, 3, 3, 4],
       },
     },
     h1: {
@@ -93,6 +103,14 @@ const baseTheme = {
       },
     },
   },
+  buttons: {
+    white: {
+      color: "text",
+      bg: "background",
+      border: `1px solid #E2E2E2`,
+      boxShadow: boxShadows.button,
+    },
+  },
   sizes: {
     container: breakpoints.xxxl,
   },
@@ -100,6 +118,9 @@ const baseTheme = {
     container: {
       large: {
         maxWidth: breakpoints.xxxl,
+      },
+      medium: {
+        maxWidth: breakpoints.xxl,
       },
       text: {
         maxWidth: "900px",
