@@ -110,6 +110,10 @@ const baseTheme = {
       border: `1px solid #E2E2E2`,
       boxShadow: boxShadows.button,
     },
+    dark: {
+      color: `background`,
+      bg: `text`,
+    },
   },
   sizes: {
     container: breakpoints.xxxl,

@@ -1,14 +1,11 @@
-import React from "react"
+import React from 'react'
+
 /** @jsx jsx */
-import { jsx, Styled, css } from "theme-ui"
-import { Link } from "gatsby"
+import { jsx } from 'theme-ui'
 
-import theme from "../gatsby-plugin-theme-ui"
-import { mediaQueries } from "../gatsby-plugin-theme-ui/media-queries"
-
-const ButtonLink = ({ children, variant, ...rest }) => {
+export const SnipCartButton = ({ className, variant, children, ...rest }) => {
   return (
-    <Link
+    <button
       sx={{
         appearance: "none",
         display: "block",
@@ -31,21 +28,14 @@ const ButtonLink = ({ children, variant, ...rest }) => {
         fontWeight: `500`,
         fontFamily: `heading`,
         maxWidth: `300px`,
-        variant: variant ? `buttons.${variant}` : null,
         borderRadius: `6px`,
-        "~ button, ~ a": {
-          mt: `0 !important`,
-        },
-        "~ p, ~ div": {
-          mt: 5,
-        },
+        width: `100%`,
+        variant: variant ? `buttons.${variant}` : null
       }}
-      to='/'
+      className={className}
       {...rest}
     >
       {children}
-    </Link>
+    </button>
   )
 }
-
-export default ButtonLink

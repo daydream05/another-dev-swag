@@ -144,7 +144,7 @@ export const query = graphql`
         }
       }
     }
-    products: allSanityProduct {
+    products: allSanityProduct(filter: {isActive: {eq: true}}) {
       edges {
         node {
           id
@@ -154,7 +154,7 @@ export const query = graphql`
           mainImage {
             asset {
               _id
-              fluid(maxWidth: 600, maxHeight: 600) {
+              fluid(maxWidth: 300, maxHeight: 300) {
                 ...GatsbySanityImageFluid_noBase64
               }
             }

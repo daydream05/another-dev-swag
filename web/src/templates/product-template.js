@@ -11,6 +11,7 @@ import Layout from "../components/layout"
 import { mediaQueries } from '../gatsby-plugin-theme-ui/media-queries'
 
 import { api as sanityConfig } from "../../../studio/sanity.json"
+import { SnipCartButton } from '../components/snipcart-button'
 
 
 
@@ -49,9 +50,9 @@ const ProductTemplate = ({ data }) => {
           sx={{
             [mediaQueries.xl]: {
               display: `grid`,
-              gridTemplateColumns: `800px 400px`,
-              gridGap: 3,
-              justifyContent: `center`
+              gridTemplateColumns: `650px 400px`,
+              gridGap: 5,
+              justifyContent: `center`,
             },
           }}
         >
@@ -87,13 +88,22 @@ const ProductGallery = ({ mainImage }) => {
   )
 }
 
-const ProductInfo = ({ title, price, description }) => {
+const ProductInfo = ({ title, price, description, className }) => {
   return (
-    <div>
+    <div
+      sx={{
+        px: 4,
+        py: 5,
+        [mediaQueries.xl]: {
+          pt: 0,
+        }
+      }}
+      className={className}>
       <h1
         sx={{
           fontWeight: `500`,
           fontSize: 5,
+          mt: 0,
         }}
       >
         {title}
@@ -108,6 +118,23 @@ const ProductInfo = ({ title, price, description }) => {
         <span>${price}</span>
       </div>
       {description && <BlockContent blocks={description} />}
+      <SnipCartButton
+        sx={{
+          mt: 5,
+          maxWidth: `unset`,
+        }}
+      >
+        Add to cart
+      </SnipCartButton>
+      <SnipCartButton
+        sx={{
+          mt: 2,
+          maxWidth: `unset`,
+        }}
+        variant="dark"
+      >
+        Buy now
+      </SnipCartButton>
     </div>
   )
 }
