@@ -40,7 +40,7 @@ export const Header = ({ siteTitle }) => {
         >
           <Link
             sx={{
-              fontFamily: `Montserrat`,
+              fontFamily: `heading`,
               fontWeight: `bold`,
               fontSize: 3,
               textDecoration: `none`,
@@ -48,7 +48,7 @@ export const Header = ({ siteTitle }) => {
             }}
             to="/"
           >
-            GrabASwag
+            AnotherDevSwag
           </Link>
           <div
           >

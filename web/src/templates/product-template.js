@@ -91,7 +91,7 @@ const ProductGallery = ({ mainImage }) => {
 const ProductInfo = ({ product, className }) => {
   const { title, price, _rawDescription } = product
 
-  console.log(product)
+
   return (
     <div
       sx={{
@@ -129,7 +129,7 @@ const ProductInfo = ({ product, className }) => {
         }}
         data-item-id={product?.id}
         data-item-price={product?.price}
-        data-item-url={product?.path}
+        path={product?.path}
         data-item-image={product?.mainImage?.asset?.url}
         data-item-name={product?.title}
       >
@@ -141,6 +141,12 @@ const ProductInfo = ({ product, className }) => {
           maxWidth: `unset`,
         }}
         variant="dark"
+        className="snipcart-checkout"
+        data-item-id={product?.id}
+        data-item-price={product?.price}
+        path={product?.path}
+        data-item-image={product?.mainImage?.asset?.url}
+        data-item-name={product?.title}
       >
         Buy now
       </SnipCartButton>

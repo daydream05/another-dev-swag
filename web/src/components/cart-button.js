@@ -25,7 +25,7 @@ export const CartButton = () => {
       })
 
       const itemUpdated = window.Snipcart.events.on("item.updated", () => {
-        console.log("hello world")
+
         let count = window.Snipcart.store
           .getState()
           .cart.items.items.reduce((acc, item) => item.quantity + acc, 0)
@@ -34,7 +34,7 @@ export const CartButton = () => {
       })
 
       const itemRemoved = window.Snipcart.events.on("item.removed", () => {
-        console.log("hello world")
+
         let count = window.Snipcart.store
           .getState()
           .cart.items.items.reduce((acc, item) => item.quantity + acc, 0)

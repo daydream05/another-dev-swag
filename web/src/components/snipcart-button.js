@@ -3,7 +3,7 @@ import React from 'react'
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 
-export const SnipCartButton = ({ className, variant, children, ...rest }) => {
+export const SnipCartButton = ({ className, variant, path, children, ...rest }) => {
   return (
     <button
       sx={{
@@ -33,6 +33,7 @@ export const SnipCartButton = ({ className, variant, children, ...rest }) => {
         variant: variant ? `buttons.${variant}` : null,
       }}
       className={`${className} snipcart-add-item`}
+      data-item-url={`${path}`}
       {...rest}
     >
       {children}

@@ -127,8 +127,6 @@ export const heroSerializers = {
         node?.internalLink?.slug
       )
 
-      console.log(node)
-
       return (
         <ButtonLink
           variant={node?.color}
