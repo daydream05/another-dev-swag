@@ -135,7 +135,7 @@ export const query = graphql`
   query indexPageQuery {
     page: sanityPage(slug: { current: { eq: "home" } }) {
       hero {
-        _rawContent
+        _rawContent(resolveReferences: { maxDepth: 5 })
         mainImage {
           alt
           asset {

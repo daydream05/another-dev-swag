@@ -18,6 +18,7 @@ import { SnipCartButton } from '../components/snipcart-button'
 export const query = graphql`
   query ProductTemplateQuery($id: String!) {
     product: sanityProduct(id: { eq: $id }) {
+      id
       title
       price
       path
@@ -25,6 +26,7 @@ export const query = graphql`
       mainImage {
         alt
         asset {
+          url
           _id
         }
       }
@@ -58,9 +60,7 @@ const ProductTemplate = ({ data }) => {
         >
           <ProductGallery mainImage={product?.mainImage} />
           <ProductInfo
-            title={product?.title}
-            price={product?.price}
-            description={product?._rawDescription}
+            product={product}
           />
         </Container>
       </section>
@@ -88,7 +88,10 @@ const ProductGallery = ({ mainImage }) => {
   )
 }
 
-const ProductInfo = ({ title, price, description, className }) => {
+const ProductInfo = ({ product, className }) => {
+  const { title, price, _rawDescription } = product
+
+  console.log(product)
   return (
     <div
       sx={{
@@ -96,9 +99,10 @@ const ProductInfo = ({ title, price, description, className }) => {
         py: 5,
         [mediaQueries.xl]: {
           pt: 0,
-        }
+        },
       }}
-      className={className}>
+      className={className}
+    >
       <h1
         sx={{
           fontWeight: `500`,
@@ -117,12 +121,17 @@ const ProductInfo = ({ title, price, description, className }) => {
       >
         <span>${price}</span>
       </div>
-      {description && <BlockContent blocks={description} />}
+      {_rawDescription && <BlockContent blocks={_rawDescription} />}
       <SnipCartButton
         sx={{
           mt: 5,
           maxWidth: `unset`,
         }}
+        data-item-id={product?.id}
+        data-item-price={product?.price}
+        data-item-url={product?.path}
+        data-item-image={product?.mainImage?.asset?.url}
+        data-item-name={product?.title}
       >
         Add to cart
       </SnipCartButton>

@@ -5,6 +5,7 @@ import { IoMdQuote } from "react-icons/io"
 import { jsx, Text, Styled } from "theme-ui"
 import ButtonLink from "../button-link"
 import { mediaQueries } from "../../gatsby-plugin-theme-ui/media-queries"
+import { getPagePath } from "../../utils/getPagePath"
 
 
 export const heroSerializers = {
@@ -121,6 +122,13 @@ export const heroSerializers = {
     button(props) {
       const { node } = props
 
+      const pagePath = getPagePath(
+        node?.internalLink?._type,
+        node?.internalLink?.slug
+      )
+
+      console.log(node)
+
       return (
         <ButtonLink
           variant={node?.color}
@@ -132,6 +140,7 @@ export const heroSerializers = {
               mr: 2,
             },
           }}
+          to={pagePath}
         >
           {node?.label}
         </ButtonLink>

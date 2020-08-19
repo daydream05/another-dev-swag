@@ -30,9 +30,9 @@ export const SnipCartButton = ({ className, variant, children, ...rest }) => {
         maxWidth: `300px`,
         borderRadius: `6px`,
         width: `100%`,
-        variant: variant ? `buttons.${variant}` : null
+        variant: variant ? `buttons.${variant}` : null,
       }}
-      className={className}
+      className={`${className} snipcart-add-item`}
       {...rest}
     >
       {children}

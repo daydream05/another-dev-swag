@@ -16,12 +16,12 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     "gatsby-plugin-theme-ui",
     {
-      resolve: 'gatsby-plugin-web-font-loader',
+      resolve: "gatsby-plugin-web-font-loader",
       options: {
         google: {
-          families: ['Poppins:400,500,700', 'Open Sans']
-        }
-      }
+          families: ["Poppins:400,500,700", "Open Sans"],
+        },
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
@@ -55,6 +55,14 @@ module.exports = {
         watchMode: activeEnv === "development",
         overlayDrafts: activeEnv === "development",
       },
+    },
+    {
+      resolve: `gatsby-plugin-snipcart-advanced`,
+      options: {
+        version: "3.0.15",
+        publicApiKey: process.env.GATSBY_SNIPCART_API_KEY, // use public api key here or in environment variable
+        openCartOnAdd: false,
+      }
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

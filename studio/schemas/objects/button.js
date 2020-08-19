@@ -13,7 +13,7 @@ export default {
       name: "internalLink",
       title: "Internal Link",
       type: "reference",
-      to: [{ type: "page" }, { type: "post" }],
+      to: [{ type: "page" }, { type: "post" }, { type: "product" }],
     },
     {
       name: "color",

@@ -6,6 +6,7 @@ import { jsx, Container } from 'theme-ui'
 import { boxShadows, constants } from "../gatsby-plugin-theme-ui"
 import { breakpoints } from "../gatsby-plugin-theme-ui/breakpoints"
 import { mediaQueries } from "../gatsby-plugin-theme-ui/media-queries"
+import { CartButton } from "./cart-button"
 
 
 export const Header = ({ siteTitle }) => {
@@ -19,7 +20,7 @@ export const Header = ({ siteTitle }) => {
           height: constants.headerHeight,
           px: 5,
           py: 0,
-        }
+        },
       }}
     >
       <Container
@@ -32,9 +33,9 @@ export const Header = ({ siteTitle }) => {
           sx={{
             display: `flex`,
             alignItems: `center`,
+            justifyContent: `space-between`,
             height: `100%`,
-            [mediaQueries.xl]: {
-            }
+            [mediaQueries.xl]: {},
           }}
         >
           <Link
@@ -46,7 +47,13 @@ export const Header = ({ siteTitle }) => {
               color: `inherit`,
             }}
             to="/"
-          >GrabASwag</Link>
+          >
+            GrabASwag
+          </Link>
+          <div
+          >
+            <CartButton />
+          </div>
         </div>
       </Container>
     </header>
