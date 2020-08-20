@@ -12,6 +12,8 @@ import { mediaQueries } from '../gatsby-plugin-theme-ui/media-queries'
 
 import { api as sanityConfig } from "../../../studio/sanity.json"
 import { SnipCartButton } from '../components/snipcart-button'
+import { ProductCard } from '../components/product-card'
+import { breakpoints } from '../gatsby-plugin-theme-ui/breakpoints'
 
 
 
@@ -31,11 +33,29 @@ export const query = graphql`
         }
       }
     }
+    moreProducts: allSanityProduct(filter: {id: { ne: $id }, isActive: { eq: true }}) {
+      edges {
+        node {
+          id
+          title
+          price
+          path
+          mainImage {
+            alt
+            asset {
+              _id
+              fluid(maxWidth: 300, maxHeight: 300) {
+                ...GatsbySanityImageFluid_noBase64
+              }
+            }
+          }
+        }
+      }
+    }
   }
 `
 const ProductTemplate = ({ data }) => {
-  const { product } = data
-
+  const { product, moreProducts  } = data
 
   return (
     <Layout>
@@ -64,6 +84,7 @@ const ProductTemplate = ({ data }) => {
           />
         </Container>
       </section>
+      <MoreProductsSection products={moreProducts?.edges} />
     </Layout>
   )
 }
@@ -151,6 +172,50 @@ const ProductInfo = ({ product, className }) => {
         Buy now
       </SnipCartButton>
     </div>
+  )
+}
+
+const MoreProductsSection = ({ products }) => {
+  return (
+    <section>
+      <Container
+        sx={{
+          maxWidth: breakpoints.lg,
+        }}
+      >
+        <h2
+          sx={{
+            fontWeight: `500`,
+            fontSize: 4,
+            textAlign: `center`,
+            mb: 4,
+          }}
+        >
+          Swag you may also like
+        </h2>
+        {products?.length > 0 && (
+          <ul
+            sx={{
+              listStyle: `none`,
+              display: `grid`,
+              gridGap: 3,
+              [mediaQueries.xl]: {
+                gridTemplateColumns: `1fr 1fr 1fr 1fr`,
+                gridGap: 4,
+              },
+            }}
+          >
+            {products.map(({ node }) => {
+              return (
+                <li key={node.id}>
+                  <ProductCard product={node} />
+                </li>
+              )
+            })}
+          </ul>
+        )}
+      </Container>
+    </section>
   )
 }
 

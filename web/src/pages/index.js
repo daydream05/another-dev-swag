@@ -8,8 +8,8 @@ import Image from "../components/image"
 import SEO from "../components/seo"
 import { HeroWithImage } from "../components/hero-with-image"
 import { mediaQueries } from "../gatsby-plugin-theme-ui/media-queries"
-import GatsbyImage from "gatsby-image"
-import ButtonLink from "../components/button-link"
+
+import { ProductCard } from '../components/product-card'
 
 
 const IndexPage = ({ data }) => {
@@ -63,60 +63,7 @@ const MoreProductsSection = ({ products }) => {
             {products.length > 0 && products.map(({ node }) => {
               return (
                 <li key={node.id}>
-                  <div
-                    sx={{
-                      display: `flex`,
-                      flexDirection: `column`,
-                      height: `100%`,
-                    }}
-                  >
-                    {node.mainImage ? (
-                      <GatsbyImage
-                        fluid={node.mainImage?.asset?.fluid}
-                        alt={node.mainImage?.alt}
-                        sx={{
-                          mb: 4,
-                        }}
-                      />
-                    ) : (
-                      <div
-                        sx={{ bg: `black`, height: `300px`, width: `100%` }}
-                      />
-                    )}
-                    <div
-                      sx={{
-                        display: `flex`,
-                        justifyContent: `space-between`,
-                        flex: 1,
-                      }}
-                    >
-                      <h3
-                        sx={{
-                          fontWeight: `500`,
-                          fontSize: 3,
-                          m: 0,
-                        }}
-                      >
-                        {node.title}
-                      </h3>
-                      <div
-                        sx={{
-                          fontWeight: `500`,
-                          fontSize: 3,
-                          ml: 4,
-                        }}
-                      >
-                        <span>${node.price}</span>
-                      </div>
-                    </div>
-                    <ButtonLink
-                      variant="white"
-                      sx={{
-                        mt: 4,
-                      }}
-                      to={node.path}
-                    >Shop now</ButtonLink>
-                  </div>
+                  <ProductCard product={node} />
                 </li>
               )
             })}
@@ -152,6 +99,7 @@ export const query = graphql`
           path
           price
           mainImage {
+            alt
             asset {
               _id
               fluid(maxWidth: 300, maxHeight: 300) {
