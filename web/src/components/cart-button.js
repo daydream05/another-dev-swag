@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useContext } from 'react'
 
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import { SiteContext } from '../context/site-manager'
 
 export const CartButton = () => {
 
-  const [itemCount, setItemCount] = useState(0)
+  const { cartCount, setCartCount, add } = useContext(SiteContext)
 
   useEffect(() => {
     if (window?.Snipcart) {
@@ -14,15 +15,7 @@ export const CartButton = () => {
         .getState()
         .cart.items.items.reduce((acc, item) => item.quantity + acc, 0)
 
-      setItemCount(count)
-
-      const itemAdded = window.Snipcart.events.on("item.added", () => {
-        let count = window.Snipcart.store
-          .getState()
-          .cart.items.items.reduce((acc, item) => item.quantity + acc, 0)
-
-        setItemCount(count)
-      })
+      setCartCount(count)
 
       const itemUpdated = window.Snipcart.events.on("item.updated", () => {
 
@@ -30,7 +23,7 @@ export const CartButton = () => {
           .getState()
           .cart.items.items.reduce((acc, item) => item.quantity + acc, 0)
 
-        setItemCount(count)
+        setCartCount(count)
       })
 
       const itemRemoved = window.Snipcart.events.on("item.removed", () => {
@@ -39,12 +32,11 @@ export const CartButton = () => {
           .getState()
           .cart.items.items.reduce((acc, item) => item.quantity + acc, 0)
 
-        setItemCount(count)
+        setCartCount(count)
       })
 
       return () => {
         // unsubscribe
-        itemAdded()
         itemUpdated()
         itemRemoved()
       }
@@ -79,7 +71,9 @@ export const CartButton = () => {
           justifyContent: `center`,
           ml: 2,
         }}
-      >{itemCount}</span>
+      >
+        {cartCount}
+      </span>
     </button>
   )
 }

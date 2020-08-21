@@ -17,6 +17,9 @@ import mainImage from './objects/mainImage'
 import figure from './objects/figure'
 import seo from './objects/seo'
 import product from './documents/product'
+import siteSettings from './documents/siteSettings'
+import blockBanner from './blocks/blockBanner'
+import banner from './documents/banner'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -33,6 +36,8 @@ export default createSchema({
     category,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
+    banner,
+    blockBanner,
     blockContent,
     blockHero,
     button,
@@ -40,6 +45,7 @@ export default createSchema({
     heroWithImage,
     mainImage,
     product,
-    seo
+    seo,
+    siteSettings,
   ])
 })

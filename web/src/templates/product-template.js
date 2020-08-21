@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { graphql } from 'gatsby'
 import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import GatsbyImage from "gatsby-image"
@@ -14,6 +14,7 @@ import { api as sanityConfig } from "../../../studio/sanity.json"
 import { SnipCartButton } from '../components/snipcart-button'
 import { ProductCard } from '../components/product-card'
 import { breakpoints } from '../gatsby-plugin-theme-ui/breakpoints'
+import { SiteContext } from '../context/site-manager'
 
 
 
@@ -94,6 +95,7 @@ const ProductGallery = ({ mainImage }) => {
   const fluidImage =
     imageAssetId &&
     getFluidGatsbyImage(imageAssetId, { maxWidth: 3000 }, sanityConfig)
+    
 
   return (
     <div>
@@ -112,6 +114,7 @@ const ProductGallery = ({ mainImage }) => {
 const ProductInfo = ({ product, className }) => {
   const { title, price, _rawDescription } = product
 
+  const { addItemToCart } = useContext(SiteContext)
 
   return (
     <div
