@@ -177,10 +177,15 @@ const ProductInfo = ({ product, className }) => {
 
 const MoreProductsSection = ({ products }) => {
   return (
-    <section>
+    <section
+      sx={{
+        py: 5,
+        px: 4,
+      }}
+    >
       <Container
         sx={{
-          maxWidth: breakpoints.lg,
+          maxWidth: breakpoints.xl,
         }}
       >
         <h2
@@ -197,6 +202,7 @@ const MoreProductsSection = ({ products }) => {
           <ul
             sx={{
               listStyle: `none`,
+              margin: 0,
               display: `grid`,
               gridGap: 3,
               [mediaQueries.xl]: {
