@@ -32,8 +32,6 @@ const Layout = ({ children }) => {
 
   const { isBannerShown, hideBanner } = useContext(SiteContext)
 
-  console.log(isBannerShown, hideBanner)
-
   return (
     <>
       {isBannerShown ? (

@@ -74,6 +74,7 @@ const ProductTemplate = ({ data }) => {
             [mediaQueries.xl]: {
               display: `grid`,
               gridTemplateColumns: `650px 400px`,
+              gridTemplateRows: `487.5px auto`,
               gridGap: 5,
               justifyContent: `center`,
             },
@@ -98,7 +99,11 @@ const ProductGallery = ({ mainImage }) => {
     
 
   return (
-    <div>
+    <div
+      sx={{
+        position: `relative`,
+      }}
+    >
       {fluidImage ? (
         <GatsbyImage
           fluid={fluidImage}

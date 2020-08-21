@@ -5,7 +5,6 @@ export const SiteContext = React.createContext({
   hideBanner: () => {},
   cartCount: 0,
   setCartCount: () => {},
-  addItemToCart: () => {},
 })
 
 export const SiteProvider = ({ children }) => {
@@ -40,13 +39,7 @@ export const SiteProvider = ({ children }) => {
     localStorage.setItem('cartCount', JSON.stringify(count))
     setCartCount(count)
   }
-
-  const handleAddItemToCart = (increment = 1) =>{
-    console.log('hello')
-    setCartCount(increment + cartCount)
-  }
   
-
   return (
     <SiteContext.Provider
       value={{
@@ -54,7 +47,6 @@ export const SiteProvider = ({ children }) => {
         isBannerShown: showBanner,
         cartCount: cartCount,
         setCartCount: handleCartCount,
-        addItemToCart: handleAddItemToCart,
       }}
     >
       {children}
