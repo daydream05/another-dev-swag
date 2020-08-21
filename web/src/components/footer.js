@@ -21,7 +21,6 @@ export const Footer = () => {
           px: 4,
           py: 5,
           display: `flex`,
-          flexDirection: `column`,
           alignItems: `center`,
           [mediaQueries.xl]: {
             px: 6,
@@ -33,7 +32,7 @@ export const Footer = () => {
             mb: 4,
             [mediaQueries.xl]: {
               mb: 0,
-              alignSelf: `flex-start`,
+              flex: 1,
             },
           }}
         >
