@@ -31,6 +31,13 @@ export const query = graphql`
         asset {
           url
           _id
+          metadata {
+            dimensions {
+              height
+              width
+              aspectRatio
+            }
+          }
         }
       }
     }
@@ -95,20 +102,23 @@ const ProductGallery = ({ mainImage }) => {
   const imageAssetId = mainImage?.asset?._id
   const fluidImage =
     imageAssetId &&
-    getFluidGatsbyImage(imageAssetId, { maxWidth: 3000 }, sanityConfig)
+    getFluidGatsbyImage(imageAssetId, { maxWidth: 478.5 }, sanityConfig)
     
 
   return (
     <div
       sx={{
         position: `relative`,
+        width: `100%`,
+        [mediaQueries.xl]: {
+          maxWidth: `487.5px`,
+          margin: `0 auto`,
+          justifySelf: `center`,
+        },
       }}
     >
       {fluidImage ? (
-        <GatsbyImage
-          fluid={fluidImage}
-          alt={mainImage?.alt}
-        />
+        <GatsbyImage fluid={fluidImage} alt={mainImage?.alt} />
       ) : (
         <div sx={{ bg: `tealHighlight` }} />
       )}
