@@ -181,6 +181,9 @@ const MoreProductsSection = ({ products }) => {
       sx={{
         py: 5,
         px: 4,
+        [mediaQueries.xl]: {
+          py: 6,
+        }
       }}
     >
       <Container
