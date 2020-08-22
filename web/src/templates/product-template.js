@@ -26,6 +26,12 @@ export const query = graphql`
       price
       path
       _rawDescription
+      customFields {
+        name
+        options
+        defaultValue
+        isRequired
+      }
       mainImage {
         alt
         asset {
@@ -129,7 +135,33 @@ const ProductGallery = ({ mainImage }) => {
 const ProductInfo = ({ product, className }) => {
   const { title, price, _rawDescription } = product
 
-  const { addItemToCart } = useContext(SiteContext)
+  let customField = {}
+
+  if(product?.customFields?.length > 0) {
+    const { customFields } = product
+
+    const initialVal = customFields[0]
+    customField = product?.customFields?.reduce(
+      (acc, val, idx) => {
+        const { options, name, defaultValue, isRequired } = val 
+        return {
+          ...acc,
+          [`data-item-custom${idx + 1}-name`]: val.name,
+          ...(options && { [`data-item-custom${idx + 1}-options`]: val.options }),
+          ...(defaultValue && { [`data-item-custom${idx + 1}-value`]: val.defaultValue }),
+          ...(isRequired && { [`data-item-custom${idx + 1}-isRequired`]: val.isRequired })
+        }
+      },
+      {
+        [`data-item-custom1-name`]: customFields[0].name,
+        ...(initialVal.options && { [`data-item-custom1-options`]: initialVal.options }),
+        ...(initialVal.defaultValue && { [`data-item-custom1-value`]: initialVal.defaultValue }),
+        ...(initialVal.isRequired && { [`data-item-custom1-isRequired`]: initialVal.isRequired })
+      }
+    )
+  }
+
+  console.log(customField)
 
   return (
     <div
@@ -171,6 +203,7 @@ const ProductInfo = ({ product, className }) => {
         path={product?.path}
         data-item-image={product?.mainImage?.asset?.url}
         data-item-name={product?.title}
+        {...customField}
       >
         Add to cart
       </SnipCartButton>
@@ -186,6 +219,7 @@ const ProductInfo = ({ product, className }) => {
         path={product?.path}
         data-item-image={product?.mainImage?.asset?.url}
         data-item-name={product?.title}
+        {...customField}
       >
         Buy now
       </SnipCartButton>

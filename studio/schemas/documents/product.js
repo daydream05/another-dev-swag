@@ -42,6 +42,12 @@ export default {
       type: 'blockContent'
     },
     {
+      name: 'customFields',
+      title: 'Custom Fields',
+      type: 'array',
+      of: [{ type: 'customProductField' }],
+    },
+    {
       name: 'seo',
       title: 'SEO',
       type: 'seo',
