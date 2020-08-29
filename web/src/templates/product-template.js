@@ -258,6 +258,7 @@ const MoreProductsSection = ({ products }) => {
             sx={{
               listStyle: `none`,
               margin: 0,
+              padding: 0,
               display: `grid`,
               gridGap: 3,
               [mediaQueries.xl]: {

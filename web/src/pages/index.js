@@ -49,6 +49,7 @@ const MoreProductsSection = ({ products }) => {
               listStyle: `none`,
               ml: 0,
               mb: 0,
+              p: 0,
               li: {
                 mb: 0,
               },

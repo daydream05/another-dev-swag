@@ -22,8 +22,10 @@ export const Footer = () => {
           py: 5,
           display: `flex`,
           alignItems: `center`,
+          flexDirection: `column`,
           [mediaQueries.xl]: {
             px: 6,
+            flexDirection: `row`
           },
         }}
       >
