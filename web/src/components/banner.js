@@ -5,6 +5,7 @@ import { bannerSerializer } from './serializers/banner-serializer'
 /** @jsx jsx */
 import { jsx, Container } from 'theme-ui'
 import { constants } from '../gatsby-plugin-theme-ui'
+import { mediaQueries } from '../gatsby-plugin-theme-ui/media-queries'
 
 export const Banner = ({ banner, onDismiss }) => {
   return (
@@ -12,10 +13,14 @@ export const Banner = ({ banner, onDismiss }) => {
       sx={{
         bg: "darkAccent",
         color: `white`,
-        px: 4,
+        px: 3,
         height: constants.bannerHeight,
         p: {
           m: 0,
+          whiteSpace: `nowrap`,
+        },
+        [mediaQueries.lg]: {
+          px: 4,
         },
       }}
     >
@@ -32,19 +37,28 @@ export const Banner = ({ banner, onDismiss }) => {
           sx={{
             display: `flex`,
             alignItems: `center`,
-            justifyContent: `center`,
             height: `100%`,
+            overflow: `scroll`,
+            width: `calc(100% - 32px)`,
+            [mediaQueries.lg]: {
+              alignItems: `center`,
+              justifyContent: `center`,
+              width: `100%`,
+            },
           }}
         />
         <div
           sx={{
             position: `absolute`,
-            right: 4,
+            right: 0,
             top: 0,
             height: `100%`,
             display: `flex`,
             justifyContent: `center`,
             alignItems: `center`,
+            [mediaQueries.lg]: {
+              right: 4,
+            },
           }}
         >
           <button
