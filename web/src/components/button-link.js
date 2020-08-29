@@ -24,13 +24,13 @@ const ButtonLink = ({ children, variant, ...rest }) => {
         color: "text",
         bg: "primary",
         minWidth: `128px`,
+        width: `100%`,
         border: 0,
         display: `flex`,
         alignItems: `center`,
         justifyContent: `center`,
         fontWeight: `500`,
         fontFamily: `heading`,
-        maxWidth: `300px`,
         variant: variant ? `buttons.${variant}` : null,
         borderRadius: `6px`,
         "~ button, ~ a": {
@@ -39,8 +39,11 @@ const ButtonLink = ({ children, variant, ...rest }) => {
         "~ p, ~ div": {
           mt: 5,
         },
+        [mediaQueries.xl]: {
+          maxWidth: `300px`,
+        },
       }}
-      to='/'
+      to="/"
       {...rest}
     >
       {children}

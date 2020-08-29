@@ -30,19 +30,19 @@ const MoreProductsSection = ({ products }) => {
         px: 4,
         [mediaQueries.xl]: {
           px: 6,
-        }
+        },
       }}
     >
-      <Container
-        variant="layout.container.medium"
-      >
+      <Container variant="layout.container.medium">
         <h2
           sx={{
             fontWeight: `500`,
             textAlign: `center`,
             mb: 4,
           }}
-        >More products</h2>
+        >
+          More products
+        </h2>
         {products && (
           <ul
             sx={{
@@ -53,26 +53,28 @@ const MoreProductsSection = ({ products }) => {
               li: {
                 mb: 0,
               },
+              display: `grid`,
+              gridGap: 5,
               [mediaQueries.xl]: {
                 display: `grid`,
                 gridTemplateColumns: `repeat(3, 300px)`,
                 gridGap: 4,
                 justifyContent: `center`,
-              }
+              },
             }}
           >
-            {products.length > 0 && products.map(({ node }) => {
-              return (
-                <li key={node.id}>
-                  <ProductCard product={node} />
-                </li>
-              )
-            })}
+            {products.length > 0 &&
+              products.map(({ node }) => {
+                return (
+                  <li key={node.id}>
+                    <ProductCard product={node} />
+                  </li>
+                )
+              })}
           </ul>
         )}
       </Container>
     </section>
-    
   )
 }
 
