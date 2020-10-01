@@ -15,6 +15,7 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     "gatsby-plugin-theme-ui",
+    `gatsby-plugin-next-seo`,
     {
       resolve: "gatsby-plugin-web-font-loader",
       options: {

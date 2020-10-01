@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import GatsbyImage from "gatsby-image"
 import BlockContent from "@sanity/block-content-to-react"
+import { ProductJsonLd, GatsbySeo } from 'gatsby-plugin-next-seo'
 
 /** @jsx jsx */
 import { jsx, Container } from 'theme-ui'
@@ -15,6 +16,7 @@ import { SnipCartButton } from '../components/snipcart-button'
 import { ProductCard } from '../components/product-card'
 import { breakpoints } from '../gatsby-plugin-theme-ui/breakpoints'
 import { SiteContext } from '../context/site-manager'
+import { portableTextToPlainText } from '../utils/portableTextToPlainText'
 
 
 
@@ -71,8 +73,23 @@ export const query = graphql`
 const ProductTemplate = ({ data }) => {
   const { product, moreProducts  } = data
 
+  const plainTextDescription = portableTextToPlainText(product?._rawDescription)
+
+  console.log(plainTextDescription)
+
   return (
     <Layout>
+      {product && (
+        <ProductJsonLd
+          productName={product.title}
+          images={[product.mainImage?.asset?.url]}
+          description={plainTextDescription}
+          titleTemplate={"%s | AnotherDevSwag"}
+        />
+      )}
+      {product && (
+        <GatsbySeo title={product.title} description={plainTextDescription} />
+      )}
       <section
         sx={{
           [mediaQueries.xl]: {
@@ -94,9 +111,7 @@ const ProductTemplate = ({ data }) => {
           }}
         >
           <ProductGallery mainImage={product?.mainImage} />
-          <ProductInfo
-            product={product}
-          />
+          <ProductInfo product={product} />
         </Container>
       </section>
       <MoreProductsSection products={moreProducts?.edges} />
@@ -161,7 +176,6 @@ const ProductInfo = ({ product, className }) => {
     )
   }
 
-  console.log(customField)
 
   return (
     <div
