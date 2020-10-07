@@ -1,4 +1,8 @@
 export const portableTextToPlainText = (blocks = []) => {
+  if(!blocks) {
+    return null
+  }
+  
   return (
     blocks
       // loop through each block

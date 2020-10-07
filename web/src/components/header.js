@@ -48,7 +48,7 @@ export const Header = ({ siteTitle }) => {
             }}
             to="/"
           >
-            AnotherDevSwag
+            Swagascript
           </Link>
           <div
           >
