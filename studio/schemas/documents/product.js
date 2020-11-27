@@ -37,6 +37,11 @@ export default {
       type: 'mainImage',
     },
     {
+      name: 'gallery',
+      title: 'Gallery',
+      type: 'gallery',
+    },
+    {
       name: 'description',
       title: 'Description',
       type: 'blockContent'

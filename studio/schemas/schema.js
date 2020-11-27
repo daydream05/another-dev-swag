@@ -21,6 +21,7 @@ import siteSettings from './documents/siteSettings'
 import blockBanner from './blocks/blockBanner'
 import banner from './documents/banner'
 import customProductField from './objects/customProductField'
+import gallery from './objects/gallery'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -44,6 +45,7 @@ export default createSchema({
     button,
     customProductField,
     figure,
+    gallery,
     heroWithImage,
     mainImage,
     product,
