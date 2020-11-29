@@ -8,8 +8,11 @@ export const SiteContext = React.createContext({
 })
 
 export const SiteProvider = ({ children }) => {
-  const storageCartCount = window?.localStorage?.getItem(`cartCount`)
-  const defaultCartCount = storageCartCount !== `undefined` ? storageCartCount : 0
+  let defaultCartCount
+  
+  if(typeof window !== `undefined` ) {
+    defaultCartCount = window?.localStorage?.getItem(`cartCount`)
+  }
 
   const [showBanner, setShowBanner] = useState(true)
   const [cartCount, setCartCount] = useState(defaultCartCount)
