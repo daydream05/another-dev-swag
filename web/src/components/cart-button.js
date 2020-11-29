@@ -6,42 +6,7 @@ import { SiteContext } from '../context/site-manager'
 
 export const CartButton = () => {
 
-  const { cartCount, setCartCount, add } = useContext(SiteContext)
-
-  useEffect(() => {
-    if (window?.Snipcart) {
-
-      let count = window.Snipcart.store
-        .getState()
-        .cart.items.items.reduce((acc, item) => item.quantity + acc, 0)
-
-      setCartCount(count)
-
-      const itemUpdated = window.Snipcart.events.on("item.updated", () => {
-
-        let count = window.Snipcart.store
-          .getState()
-          .cart.items.items.reduce((acc, item) => item.quantity + acc, 0)
-
-        setCartCount(count)
-      })
-
-      const itemRemoved = window.Snipcart.events.on("item.removed", () => {
-
-        let count = window.Snipcart.store
-          .getState()
-          .cart.items.items.reduce((acc, item) => item.quantity + acc, 0)
-
-        setCartCount(count)
-      })
-
-      return () => {
-        // unsubscribe
-        itemUpdated()
-        itemRemoved()
-      }
-    }
-  }, [])
+  const { cartCount } = useContext(SiteContext)
 
   return (
     <button

@@ -8,15 +8,7 @@ export const SiteContext = React.createContext({
 })
 
 export const SiteProvider = ({ children }) => {
-  const localStorage =
-    typeof window !== `undefined` ? window.localStorage : null
-
-  let defaultCartCount
-  if(localStorage) {
-    defaultCartCount = JSON.parse(localStorage.cartCount || 0)
-  } else {
-    defaultCartCount = 0
-  }
+  const defaultCartCount = window?.localStorage?.getItem(`cartCount`) || 0
 
   const [showBanner, setShowBanner] = useState(true)
   const [cartCount, setCartCount] = useState(defaultCartCount)
@@ -27,16 +19,49 @@ export const SiteProvider = ({ children }) => {
 
   useEffect(() => {
     if (window?.Snipcart) {
-      let count = window.Snipcart.store
-        .getState()
-        .cart.items.items.reduce((acc, item) => item.quantity + acc, 0)
+      const itemUpdated = window.Snipcart.events.on(
+        "item.adding",
+        () => {
+          let count = window.Snipcart.store
+            .getState()
+            .cart.items.items.reduce(
+              (acc, item) => item.quantity + acc,
+              0
+            )
 
-      setCartCount(count)
+          setCartCount(count + 1)
+        }
+      )
+
+      const itemRemoved = window.Snipcart.events.on(
+        "item.removed",
+        () => {
+          let count = window.Snipcart.store
+            .getState()
+            .cart.items.items.reduce(
+              (acc, item) => item.quantity + acc,
+              0
+            )
+
+          setCartCount(count)
+        }
+      )
+
+      
+      return () => {
+        // unsubscribe
+        itemUpdated()
+        itemRemoved()
+      }
     }
   }, [])
 
+  useEffect(() => {
+    window?.localStorage?.setItem(`cartCount`, cartCount)
+  }, [cartCount])
+
   const handleCartCount = (count) => {
-    localStorage.setItem('cartCount', JSON.stringify(count))
+    window?.localStorage?.setItem('cartCount', JSON.stringify(count))
     setCartCount(count)
   }
   
