@@ -1,9 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import { getFluidGatsbyImage } from "gatsby-source-sanity"
 import GatsbyImage from "gatsby-image"
 import BlockContent from "@sanity/block-content-to-react"
 import { ProductJsonLd, GatsbySeo } from 'gatsby-plugin-next-seo'
+import { IoIosArrowDown } from "react-icons/io"
+
 
 /** @jsx jsx */
 import { jsx, Container } from 'theme-ui'
@@ -17,6 +19,7 @@ import { ProductCard } from '../components/product-card'
 import { breakpoints } from '../gatsby-plugin-theme-ui/breakpoints'
 import { SiteContext } from '../context/site-manager'
 import { portableTextToPlainText } from '../utils/portableTextToPlainText'
+import { CustomProductFieldSelector } from '../components/custom-product-field-selector'
 
 
 
@@ -29,10 +32,40 @@ export const query = graphql`
       path
       _rawDescription
       customFields {
-        name
-        options
-        defaultValue
-        isRequired
+        ... on SanitySnipcartCustomFieldDropdown {
+          _type
+          _key
+          name
+          options {
+            label
+            additionalPrice
+          }
+          defaultValue
+          isRequired
+          placeholder
+        }
+        ... on SanitySnipcartCustomFieldTextbox {
+          _type
+          _key
+          name
+          type
+          defaultValue
+          isRequired
+          placeholder
+        }
+        ... on SanitySnipcartCustomFieldTextarea {
+          _type
+          _key
+          name
+          placeholder
+          isRequired
+        }
+        ... on SanitySnipcartCustomFieldCheckbox {
+          _type
+          _key
+          name
+          isRequired
+        }
       }
       mainImage {
         alt
@@ -74,8 +107,6 @@ const ProductTemplate = ({ data }) => {
   const { product, moreProducts  } = data
 
   const plainTextDescription = portableTextToPlainText(product?._rawDescription)
-
-  console.log(plainTextDescription)
 
   return (
     <Layout>
@@ -148,34 +179,85 @@ const ProductGallery = ({ mainImage }) => {
 }
 
 const ProductInfo = ({ product, className }) => {
-  const { title, price, _rawDescription } = product
+  const { title, price, _rawDescription, customFields } = product
 
-  let customField = {}
+  const [cfValues, setCfValues] = useState([])
 
-  if(product?.customFields?.length > 0) {
-    const { customFields } = product
+  const handleCfChange = (event, id) => {
 
-    const initialVal = customFields[0]
-    customField = product?.customFields?.reduce(
-      (acc, val, idx) => {
-        const { options, name, defaultValue, isRequired } = val 
-        return {
-          ...acc,
-          [`data-item-custom${idx + 1}-name`]: val.name,
-          ...(options && { [`data-item-custom${idx + 1}-options`]: val.options }),
-          ...(defaultValue && { [`data-item-custom${idx + 1}-value`]: val.defaultValue }),
-          ...(isRequired && { [`data-item-custom${idx + 1}-isRequired`]: val.isRequired })
-        }
-      },
-      {
-        [`data-item-custom1-name`]: customFields[0].name,
-        ...(initialVal.options && { [`data-item-custom1-options`]: initialVal.options }),
-        ...(initialVal.defaultValue && { [`data-item-custom1-value`]: initialVal.defaultValue }),
-        ...(initialVal.isRequired && { [`data-item-custom1-isRequired`]: initialVal.isRequired })
-      }
-    )
+    let vals = [...cfValues]
+    if(event.target.type === `checkbox`) {
+      vals[id] = event.target.checked
+    } else {
+      vals[id] = event.target.value
+    }
+
+    setCfValues(vals)
   }
 
+  const generateCustomFieldAttributes = ({ customFields }) => {
+    if(!customFields) {
+      return {}
+    }
+
+    let attributeObj = {}
+
+    for(let i = 0; i < customFields.length; i++) {
+      const field = customFields[i]
+
+      const dataItemString = `data-item-custom${i + 1}`
+
+      if(field.name) {
+        attributeObj[`${dataItemString}-name`] = field.name
+      }
+
+      if (field.options) {
+        const optionsString = field.options?.reduce((acc, val, id) => {
+          return `${acc}|${val.label}${
+            val.additionalPrice ? `[+${val.additionalPrice}]` : ``
+          }`
+        }, "")
+        attributeObj[`${dataItemString}-options`] = optionsString
+        
+        // set the default value to the first item on the options array
+        attributeObj[`${dataItemString}-value`] = field.options[0].name
+      }
+
+      if (field.isRequired) {
+        attributeObj[`${dataItemString}-isRequired`] = field.isRequired
+      }
+
+      if(field.defaultValue) {
+        attributeObj[`${dataItemString}-value`] = field.defaultValue
+      }
+
+      if(field._type === `snipcartCustomFieldTextarea`) {
+         attributeObj[`${dataItemString}-type`]= "textarea"
+      }
+
+      if (field._type === `snipcartCustomFieldCheckbox`) {
+        attributeObj[`${dataItemString}-type`] = "checkbox"
+      }
+    }
+
+    return attributeObj
+  }
+
+  const generateValueAttributes = () => {
+    let attributeObj = {}
+    for(let i = 0; i < cfValues.length; i++) {
+      const value = cfValues[i]
+      const dataItemString = `data-item-custom${i + 1}`
+
+      attributeObj[`${dataItemString}-value`] = value
+    }
+
+    return attributeObj
+  }
+
+  const customFieldAttributes =  generateCustomFieldAttributes({ customFields })
+
+  const valueAttributes = generateValueAttributes()
 
   return (
     <div
@@ -206,10 +288,20 @@ const ProductInfo = ({ product, className }) => {
       >
         <span>${price}</span>
       </div>
-      {_rawDescription && <BlockContent blocks={_rawDescription} />}
+      {_rawDescription && (
+        <div sx={{ mb: 5 }}>
+          <BlockContent blocks={_rawDescription} />
+        </div>
+      )}
+      {product?.customFields && (
+        <ProductCustomFieldsForm
+          customFields={product.customFields}
+          handleFieldChange={handleCfChange}
+        />
+      )}
       <SnipCartButton
         sx={{
-          mt: 5,
+          mt: 4,
           maxWidth: `unset`,
         }}
         data-item-id={product?.id}
@@ -217,7 +309,8 @@ const ProductInfo = ({ product, className }) => {
         path={product?.path}
         data-item-image={product?.mainImage?.asset?.url}
         data-item-name={product?.title}
-        {...customField}
+        {...customFieldAttributes}
+        {...valueAttributes}
       >
         Add to cart
       </SnipCartButton>
@@ -233,11 +326,32 @@ const ProductInfo = ({ product, className }) => {
         path={product?.path}
         data-item-image={product?.mainImage?.asset?.url}
         data-item-name={product?.title}
-        {...customField}
+        {...customFieldAttributes}
+        {...valueAttributes}
       >
         Buy now
       </SnipCartButton>
     </div>
+  )
+}
+
+const ProductCustomFieldsForm = ({ customFields, handleFieldChange }) => {
+  if(!customFields) {
+    return null
+  }
+
+  return (
+    customFields?.length > 0 &&
+      customFields.map((field, id) => {
+        return (
+          <CustomProductFieldSelector
+            field={field}
+            key={field._key}
+            onChange={event => handleFieldChange(event, id)}
+          />
+        )
+      }
+    )
   )
 }
 

@@ -13,6 +13,7 @@ export const colors = {
   background: `white`,
   text: `#040E3F`,
   primary: `#F5BE18`,
+  buttonBorder: `#D5D5D5`,
 }
 
 export const constants = {

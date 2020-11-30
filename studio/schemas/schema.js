@@ -22,6 +22,12 @@ import blockBanner from './blocks/blockBanner'
 import banner from './documents/banner'
 import customProductField from './objects/customProductField'
 import gallery from './objects/gallery'
+import snipcartCustomFieldCheckbox from './objects/snipcartCustomFieldCheckbox'
+import snipcartCustomFieldDropdown from './objects/snipcartCustomFieldDropdown'
+import snipcartCustomFieldReadonly from './objects/snipcartCustomFieldReadonly'
+import snipcartCustomFieldTextarea from './objects/snipcartCustomFieldTextarea'
+import snipcartCustomFieldTextbox from './objects/snipcartCustomFieldTextbox'
+import dropDownOption from './objects/dropDownOption'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -35,6 +41,7 @@ export default createSchema({
     post,
     page,
     author,
+    dropDownOption,
     category,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
@@ -44,6 +51,11 @@ export default createSchema({
     blockHero,
     button,
     customProductField,
+    snipcartCustomFieldCheckbox,
+    snipcartCustomFieldDropdown,
+    snipcartCustomFieldReadonly,
+    snipcartCustomFieldTextarea,
+    snipcartCustomFieldTextbox,
     figure,
     gallery,
     heroWithImage,

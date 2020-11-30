@@ -23,42 +23,48 @@ export default {
     {
       name: `price`,
       title: `Price`,
-      type: 'number',
+      type: "number",
       validation: (Rule) => Rule.positive(),
     },
     {
-      name: 'isActive',
-      title: 'Is active?',
-      type: 'boolean',
+      name: "isActive",
+      title: "Is active?",
+      type: "boolean",
     },
     {
-      name: 'mainImage',
-      title: 'Main Image',
-      type: 'mainImage',
+      name: "mainImage",
+      title: "Main Image",
+      type: "mainImage",
     },
     {
-      name: 'gallery',
-      title: 'Gallery',
-      type: 'gallery',
+      name: "gallery",
+      title: "Gallery",
+      type: "gallery",
     },
     {
-      name: 'description',
-      title: 'Description',
-      type: 'blockContent'
+      name: "description",
+      title: "Description",
+      type: "blockContent",
     },
     {
-      name: 'customFields',
-      title: 'Custom Fields',
-      type: 'array',
-      of: [{ type: 'customProductField' }],
+      name: "customFields",
+      title: "Custom Fields",
+      type: "array",
+      of: [
+        { type: "snipcartCustomFieldCheckbox" },
+        { type: "snipcartCustomFieldDropdown" },
+        { type: "snipcartCustomFieldReadonly" },
+        { type: "snipcartCustomFieldTextarea" },
+        { type: "snipcartCustomFieldTextbox" },
+      ],
     },
     {
-      name: 'seo',
-      title: 'SEO',
-      type: 'seo',
-    }
+      name: "seo",
+      title: "SEO",
+      type: "seo",
+    },
   ],
   initialValue: () => ({
     isActive: true,
-  })
+  }),
 };
