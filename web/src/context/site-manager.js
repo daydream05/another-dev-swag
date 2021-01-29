@@ -11,7 +11,7 @@ export const SiteProvider = ({ children }) => {
   let defaultCartCount
 
   if(typeof window !== `undefined` ) {
-    defaultCartCount = window?.localStorage?.getItem(`cartCount`)
+    defaultCartCount = window?.localStorage?.getItem(`cartCount`) || 0
   }
 
   const [showBanner, setShowBanner] = useState(true)
