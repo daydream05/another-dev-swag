@@ -37,7 +37,7 @@ export const CartButton = () => {
           ml: 2,
         }}
       >
-        {cartCount}
+        {cartCount || 0}
       </span>
     </button>
   )
