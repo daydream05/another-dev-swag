@@ -63,6 +63,12 @@ export default {
       title: "SEO",
       type: "seo",
     },
+    {
+      name: 'categories',
+      title: 'Categories',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'category' }] }]
+    }
   ],
   initialValue: () => ({
     isActive: true,

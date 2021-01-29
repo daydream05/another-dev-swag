@@ -17,6 +17,27 @@ exports.createResolvers = ({ createResolvers }) => {
           return `/product/${slug.current}/`
         }
       }
+    },
+    SanityCategory: {
+      products: {
+        type: ['SanityProduct'],
+        resolve (source, args, context, info) {
+          return context.nodeModel.runQuery({
+            type: 'SanityProduct',
+            query: {
+              filter: {
+                categories: {
+                  elemMatch: {
+                    _id: {
+                      eq: source._id
+                    }
+                  }
+                }
+              }
+            }
+          })
+        }
+      }
     }
   })
 }

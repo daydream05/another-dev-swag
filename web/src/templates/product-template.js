@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { graphql } from 'gatsby'
-import { getFluidGatsbyImage } from "gatsby-source-sanity"
-import GatsbyImage from "gatsby-image"
+
 import BlockContent from "@sanity/block-content-to-react"
 import { ProductJsonLd, GatsbySeo } from 'gatsby-plugin-next-seo'
 import { IoIosArrowDown } from "react-icons/io"
@@ -20,6 +19,7 @@ import { breakpoints } from '../gatsby-plugin-theme-ui/breakpoints'
 import { SiteContext } from '../context/site-manager'
 import { portableTextToPlainText } from '../utils/portableTextToPlainText'
 import { CustomProductFieldSelector } from '../components/custom-product-field-selector'
+import { ProductGallery } from '../components/product-gallery'
 
 
 
@@ -81,8 +81,25 @@ export const query = graphql`
           }
         }
       }
+      gallery {
+        images {
+          _key
+          alt
+          asset {
+            url
+            _id
+            metadata {
+              dimensions {
+                height
+                width
+                aspectRatio
+              }
+            }
+          }
+        }
+      }
     }
-    moreProducts: allSanityProduct(filter: {id: { ne: $id }, isActive: { eq: true }}) {
+    moreProducts: allSanityProduct(filter: {id: { ne: $id }, isActive: { eq: true }}, limit: 4) {
       edges {
         node {
           id
@@ -135,46 +152,17 @@ const ProductTemplate = ({ data }) => {
             [mediaQueries.xl]: {
               display: `grid`,
               gridTemplateColumns: `650px 400px`,
-              gridTemplateRows: `487.5px auto`,
               gridGap: 5,
               justifyContent: `center`,
             },
           }}
         >
-          <ProductGallery mainImage={product?.mainImage} />
+          <ProductGallery images={product?.gallery?.images} />
           <ProductInfo product={product} />
         </Container>
       </section>
       <MoreProductsSection products={moreProducts?.edges} />
     </Layout>
-  )
-}
-
-const ProductGallery = ({ mainImage }) => {
-  const imageAssetId = mainImage?.asset?._id
-  const fluidImage =
-    imageAssetId &&
-    getFluidGatsbyImage(imageAssetId, { maxWidth: 478.5 }, sanityConfig)
-    
-
-  return (
-    <div
-      sx={{
-        position: `relative`,
-        width: `100%`,
-        [mediaQueries.xl]: {
-          maxWidth: `487.5px`,
-          margin: `0 auto`,
-          justifySelf: `center`,
-        },
-      }}
-    >
-      {fluidImage ? (
-        <GatsbyImage fluid={fluidImage} alt={mainImage?.alt} />
-      ) : (
-        <div sx={{ bg: `tealHighlight` }} />
-      )}
-    </div>
   )
 }
 
@@ -290,7 +278,7 @@ const ProductInfo = ({ product, className }) => {
       </div>
       {_rawDescription && (
         <div sx={{ mb: 5 }}>
-          <BlockContent blocks={_rawDescription} />
+          <BlockContent blocks={_rawDescription} sx={{ lineHeight: 1.2, li: { pb: 2, }}} />
         </div>
       )}
       {product?.customFields && (
@@ -363,7 +351,7 @@ const MoreProductsSection = ({ products }) => {
         px: 4,
         [mediaQueries.xl]: {
           py: 6,
-        }
+        },
       }}
     >
       <Container
@@ -388,9 +376,10 @@ const MoreProductsSection = ({ products }) => {
               margin: 0,
               padding: 0,
               display: `grid`,
-              gridGap: 3,
-              [mediaQueries.xl]: {
-                gridTemplateColumns: `1fr 1fr 1fr 1fr`,
+              gridGap: 4,
+              [mediaQueries.md]: {
+                gridTemplateColumns: `repeat(auto-fit, 300px)`,
+                justifyContent: `center`,
                 gridGap: 4,
               },
             }}

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'gatsby'
 /** @jsx jsx */
 import { jsx, Container } from "theme-ui"
 import GatsbyImage from "gatsby-image"
@@ -17,41 +18,55 @@ export const ProductCard = ({ product }) => {
       }}
     >
       {product.mainImage ? (
-        <GatsbyImage
-          fluid={product.mainImage?.asset?.fluid}
-          alt={product.mainImage?.alt}
-          sx={{
-            mb: 4,
-          }}
-        />
+        <Link to={product.path}>
+          <GatsbyImage
+            fluid={product.mainImage?.asset?.fluid}
+            alt={product.mainImage?.alt}
+            sx={{
+              mb: 4,
+            }}
+          />
+        </Link>
       ) : (
         <div sx={{ bg: `black`, height: `300px`, width: `100%` }} />
       )}
       <div
         sx={{
-          display: `flex`,
-          justifyContent: `space-between`,
           flex: 1,
         }}
       >
-        <h3
+        <Link
+          to={product.path}
           sx={{
-            fontWeight: `500`,
-            fontSize: 3,
-            m: 0,
+            textDecoration: `none`,
+            color: `inherit`,
+            display: `flex`,
+            justifyContent: `space-between`,
+            flex: 1,
+            "&:hover": {
+              textDecoration: `underline`,
+            },
           }}
         >
-          {product.title}
-        </h3>
-        <div
-          sx={{
-            fontWeight: `500`,
-            fontSize: 3,
-            ml: 4,
-          }}
-        >
-          <span>${product.price}</span>
-        </div>
+          <h5
+            sx={{
+              fontWeight: `500`,
+              fontSize: 3,
+              m: 0,
+            }}
+          >
+            {product.title}
+          </h5>
+          <span
+            sx={{
+              fontWeight: `500`,
+              fontSize: 3,
+              ml: 4,
+            }}
+          >
+            ${product.price}
+          </span>
+        </Link>
       </div>
       <ButtonLink
         variant="white"

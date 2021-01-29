@@ -29,7 +29,7 @@ export const Header = ({ siteTitle }) => {
           height: `100%`,
         }}
       >
-        <div
+        <nav
           sx={{
             display: `flex`,
             alignItems: `center`,
@@ -48,13 +48,37 @@ export const Header = ({ siteTitle }) => {
             }}
             to="/"
           >
-            Swagascript
+            SwagaScript
           </Link>
-          <div
+          <ul
+            sx={{
+              display: `flex`,
+              listStyle: `none`,
+              alignItems: `center`,
+              li: {
+                ml: 2,
+              },
+            }}
           >
-            <CartButton />
-          </div>
-        </div>
+            <li>
+              <Link
+                sx={{
+                  fontFamily: `heading`,
+                  fontWeight: `500`,
+                  fontSize: 2,
+                  textDecoration: `none`,
+                  color: `inherit`,
+                }}
+                to="/products/"
+              >
+                Shop
+              </Link>
+            </li>
+            <li>
+              <CartButton />
+            </li>
+          </ul>
+        </nav>
       </Container>
     </header>
   )

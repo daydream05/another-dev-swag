@@ -25,7 +25,7 @@ export const Footer = () => {
           flexDirection: `column`,
           [mediaQueries.xl]: {
             px: 6,
-            flexDirection: `row`
+            flexDirection: `row`,
           },
         }}
       >
@@ -47,7 +47,7 @@ export const Footer = () => {
               textDecoration: `none`,
             }}
           >
-            AnotherDevSwag
+            SwagaScript
           </Link>
         </div>
         <div
@@ -107,7 +107,7 @@ export const Footer = () => {
               fontSize: 1,
             }}
           >
-            Copyright© {new Date().getFullYear()} AnotherDevSwag
+            Copyright© {new Date().getFullYear()} SwagaScript
           </p>
         </Container>
       </div>

@@ -38,9 +38,10 @@ export const Banner = ({ banner, onDismiss }) => {
             display: `flex`,
             alignItems: `center`,
             height: `100%`,
-            overflow: `scroll`,
+            overflowX: `scroll`,
             width: `calc(100% - 32px)`,
             [mediaQueries.lg]: {
+              overflow: `unset`,
               alignItems: `center`,
               justifyContent: `center`,
               width: `100%`,
