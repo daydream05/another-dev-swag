@@ -110,6 +110,7 @@ export const query = graphql`
             alt
             asset {
               _id
+              url
               fluid(maxWidth: 300, maxHeight: 300) {
                 ...GatsbySanityImageFluid_noBase64
               }
@@ -125,6 +126,13 @@ const ProductTemplate = ({ data }) => {
 
   const plainTextDescription = portableTextToPlainText(product?._rawDescription)
 
+  const ogImages = [{
+    url: product?.mainImage?.asset?.url,
+    width: 3000,
+    height: 2250,
+  }]
+
+
   return (
     <Layout>
       {product && (
@@ -132,11 +140,18 @@ const ProductTemplate = ({ data }) => {
           productName={product.title}
           images={[product.mainImage?.asset?.url]}
           description={plainTextDescription}
-          titleTemplate={"%s | AnotherDevSwag"}
+          titleTemplate={"%s | SwagaScript"}
         />
       )}
       {product && (
-        <GatsbySeo title={product.title} description={plainTextDescription} />
+        <GatsbySeo
+          title={product.title}
+          titleTemplate={"%s | SwagaScript"}
+          description={plainTextDescription}
+          openGraph={{
+            images: ogImages,
+          }}
+        />
       )}
       <section
         sx={{

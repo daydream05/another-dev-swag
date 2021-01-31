@@ -15,7 +15,7 @@ export const SiteProvider = ({ children }) => {
   }
 
   const [showBanner, setShowBanner] = useState(true)
-  const [cartCount, setCartCount] = useState(defaultCartCount)
+  const [cartCount, setCartCount] = useState(defaultCartCount || 0)
 
   const handleHideBanner = () => {
     setShowBanner(false)
