@@ -8,7 +8,7 @@
 import React from 'react'
 import { SiteProvider } from './src/context/site-manager'
 
-export const wrapPageElement = ({ element }) => (
+export const wrapRootElement = ({ element }) => (
   <SiteProvider>
     {element}
   </SiteProvider>
