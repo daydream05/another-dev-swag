@@ -8,10 +8,10 @@ export const SiteContext = React.createContext({
 })
 
 export const SiteProvider = ({ children }) => {
-  let defaultCartCount
+  let defaultCartCount = 0
 
   if(typeof window !== `undefined` ) {
-    defaultCartCount = window?.localStorage?.getItem(`cartCount`) || 0
+    defaultCartCount = window?.localStorage?.getItem(`cartCount`)
   }
 
   const [showBanner, setShowBanner] = useState(true)
@@ -64,9 +64,6 @@ export const SiteProvider = ({ children }) => {
     window?.localStorage?.setItem(`cartCount`, cartCount)
   }, [cartCount])
 
-  useEffect(() => {
-    window?.Snipcart
-  })
 
   const handleCartCount = (count) => {
     window?.localStorage?.setItem('cartCount', JSON.stringify(count))
