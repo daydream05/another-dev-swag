@@ -22,6 +22,12 @@ export const SiteProvider = ({ children }) => {
   }
 
   useEffect(() => {
+    let defaultCount = 0
+    defaultCount = window?.localStorage?.getItem(`cartCount`)
+    setCartCount(defaultCount)
+  }, [])
+
+  useEffect(() => {
     if (window?.Snipcart) {
       const itemUpdated = window.Snipcart.events.on(
         "item.adding",
@@ -69,6 +75,8 @@ export const SiteProvider = ({ children }) => {
     window?.localStorage?.setItem('cartCount', JSON.stringify(count))
     setCartCount(count)
   }
+
+  console.log(cartCount)
   
   return (
     <SiteContext.Provider

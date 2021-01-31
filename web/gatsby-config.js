@@ -62,7 +62,7 @@ module.exports = {
       options: {
         version: "3.0.15",
         publicApiKey: process.env.GATSBY_SNIPCART_API_KEY, // use public api key here or in environment variable
-        openCartOnAdd: false,
+        openCartOnAdd: true,
       }
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
