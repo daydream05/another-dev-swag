@@ -7,6 +7,7 @@ import { SiteContext } from '../context/site-manager'
 export const CartButton = () => {
 
   const { cartCount } = useContext(SiteContext)
+  console.log(cartCount)
 
   return (
     <button
