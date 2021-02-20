@@ -4,11 +4,22 @@ import { Link } from 'gatsby'
 import { jsx, Container } from "theme-ui"
 import GatsbyImage from "gatsby-image"
 
-import { mediaQueries } from "../gatsby-plugin-theme-ui/media-queries"
-
 import ButtonLink from "../components/button-link"
+import { useQuery } from 'react-query'
 
 export const ProductCard = ({ product }) => {
+
+  const { isLoading, error, data } = useQuery(product.id, () =>
+    fetch(`https://app.snipcart.com/api/products/${product.id}`, {
+      headers: {
+        Authorization: `Basic ${btoa(
+          `${process.env.GATSBY_SNIPCART_REST_API_KEY}`
+        )}`,
+        Accept: "application/json",
+      },
+    }).then(res => res.json())
+  )
+
   return (
     <div
       sx={{
@@ -18,7 +29,7 @@ export const ProductCard = ({ product }) => {
       }}
     >
       {product.mainImage ? (
-        <Link to={product.path}>
+        <Link to={product.path} sx={{ position: `relative` }}>
           <GatsbyImage
             fluid={product.mainImage?.asset?.fluid}
             alt={product.mainImage?.alt}
@@ -35,6 +46,13 @@ export const ProductCard = ({ product }) => {
           flex: 1,
         }}
       >
+        <div sx={{ display: `flex`, mb: 3 }}>
+          {!error && data?.stock && (
+            <span
+              sx={{ color: `redAlert`, textAlign: `right`, width: `100%` }}
+            >{`${data?.stock} left in stock`}</span>
+          )}
+        </div>
         <Link
           to={product.path}
           sx={{

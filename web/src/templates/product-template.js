@@ -223,7 +223,7 @@ const ProductInfo = ({ product, className }) => {
         attributeObj[`${dataItemString}-options`] = optionsString
         
         // set the default value to the first item on the options array
-        attributeObj[`${dataItemString}-value`] = field.options[0].name
+        attributeObj[`${dataItemString}-value`] = field.options[0]?.name
       }
 
       if (field.isRequired) {
