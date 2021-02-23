@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 
 import BlockContent from "@sanity/block-content-to-react"
 import { ProductJsonLd, GatsbySeo } from 'gatsby-plugin-next-seo'
-import { IoIosArrowDown } from "react-icons/io"
+import { useQuery } from "react-query"
 
 
 /** @jsx jsx */
@@ -186,6 +186,17 @@ const ProductInfo = ({ product, className }) => {
 
   const [cfValues, setCfValues] = useState([])
 
+  const { isLoading, error, data } = useQuery(product.id, () =>
+    fetch(`https://app.snipcart.com/api/products/${product.id}`, {
+      headers: {
+        Authorization: `Basic ${btoa(
+          `${process.env.GATSBY_SNIPCART_REST_API_KEY}`
+        )}`,
+        Accept: "application/json",
+      },
+    }).then(res => res.json())
+    )
+
   const handleCfChange = (event, id) => {
 
     let vals = [...cfValues]
@@ -286,14 +297,27 @@ const ProductInfo = ({ product, className }) => {
         sx={{
           fontWeight: `500`,
           fontFamily: `heading`,
+          fontSize: 2,
           mb: 4,
+          display: `flex`,
+          justifyContent: `space-between`,
         }}
       >
         <span>${price}</span>
+        <div sx={{ display: `flex` }}>
+          {!error && data?.stock && (
+            <span
+              sx={{ color: `redAlert`, textAlign: `right`, width: `100%` }}
+            >{`${data?.stock} left in stock`}</span>
+          )}
+        </div>
       </div>
       {_rawDescription && (
         <div sx={{ mb: 5 }}>
-          <BlockContent blocks={_rawDescription} sx={{ lineHeight: 1.2, li: { pb: 2, }}} />
+          <BlockContent
+            blocks={_rawDescription}
+            sx={{ lineHeight: 1.2, li: { pb: 2 } }}
+          />
         </div>
       )}
       {product?.customFields && (
