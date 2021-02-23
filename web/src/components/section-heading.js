@@ -5,7 +5,7 @@ import BlockContent from "@sanity/block-content-to-react"
 import { breakpoints } from "../gatsby-plugin-theme-ui/breakpoints"
 
 export const SectionHeading = ({ heading, className }) => {
-  console.log(heading)
+
   return (
     <Container
       sx={{

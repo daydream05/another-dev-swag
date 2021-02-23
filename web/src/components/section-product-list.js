@@ -9,7 +9,7 @@ import { mediaQueries } from "../gatsby-plugin-theme-ui/media-queries"
 
 export const SectionProductList = ({ section }) => {
   const { heading, products } = section
-  console.log(products)
+
   return (
     <section
       sx={{

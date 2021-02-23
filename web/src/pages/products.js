@@ -8,7 +8,6 @@ import { SectionSelector } from "../components/section-selector"
 
 const ProductPage = ({ data }) => {
   const { page  } = data
-  console.log(data)
 
   const { sections }  = page
 
@@ -17,7 +16,6 @@ const ProductPage = ({ data }) => {
       <h1 sx={{ textAlign: `center`, pt: 5, pb: 4, my: 0 }}>Products</h1>
      {sections?.length > 0 && (
        sections.map((section) => {
-         console.log(section)
          return (
            <SectionSelector section={section} key={section._key} />
          )

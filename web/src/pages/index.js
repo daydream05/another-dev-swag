@@ -13,11 +13,11 @@ import { ProductCard } from '../components/product-card'
 
 
 const IndexPage = ({ data }) => {
+
   return (
     <Layout>
       <SEO title="Home" />
       <HeroWithImage hero={data?.page?.hero[0]} />
-      <MoreProductsSection products={data.products?.edges} />
     </Layout>
   )
 }
@@ -64,10 +64,10 @@ const MoreProductsSection = ({ products }) => {
             }}
           >
             {products.length > 0 &&
-              products.map(product => {
+              products.map(({ node }) => {
                 return (
-                  <li key={product.id}>
-                    <ProductCard product={product} />
+                  <li key={node.id}>
+                    <ProductCard product={node} />
                   </li>
                 )
               })}

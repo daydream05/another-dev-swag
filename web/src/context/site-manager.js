@@ -75,8 +75,6 @@ export const SiteProvider = ({ children }) => {
     window?.localStorage?.setItem('cartCount', JSON.stringify(count))
     setCartCount(count)
   }
-
-  console.log(cartCount)
   
   return (
     <SiteContext.Provider
