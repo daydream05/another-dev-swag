@@ -13,7 +13,6 @@ const ProductPage = ({ data }) => {
 
   return (
     <Layout>
-      <h1 sx={{ textAlign: `center`, pt: 5, pb: 4, my: 0 }}>Products</h1>
      {sections?.length > 0 && (
        sections.map((section) => {
          return (
