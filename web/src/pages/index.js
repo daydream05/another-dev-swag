@@ -64,10 +64,10 @@ const MoreProductsSection = ({ products }) => {
             }}
           >
             {products.length > 0 &&
-              products.map(({ node }) => {
+              products.map(product => {
                 return (
-                  <li key={node.id}>
-                    <ProductCard product={node} />
+                  <li key={product.id}>
+                    <ProductCard product={product} />
                   </li>
                 )
               })}

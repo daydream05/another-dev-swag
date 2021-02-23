@@ -24,9 +24,13 @@ export default {
       name: "hero",
       title: "Hero",
       type: "array",
-      of: [
-        { type: "heroWithImage" },
-      ],
+      of: [{ type: "heroWithImage" }],
+    },
+    {
+      name: "sections",
+      title: "Sections",
+      type: "array",
+      of: [{ type: "sectionProductList" }],
     },
   ],
 };

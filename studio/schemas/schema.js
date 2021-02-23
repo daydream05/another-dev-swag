@@ -28,6 +28,9 @@ import snipcartCustomFieldReadonly from './objects/snipcartCustomFieldReadonly'
 import snipcartCustomFieldTextarea from './objects/snipcartCustomFieldTextarea'
 import snipcartCustomFieldTextbox from './objects/snipcartCustomFieldTextbox'
 import dropDownOption from './objects/dropDownOption'
+import sectionHeading from './objects/sectionHeading'
+import sectionTitle from './blocks/sectionTitle'
+import sectionProductList from './objects/sectionProductList'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -51,6 +54,9 @@ export default createSchema({
     blockHero,
     button,
     customProductField,
+    sectionHeading,
+    sectionTitle,
+    sectionProductList,
     snipcartCustomFieldCheckbox,
     snipcartCustomFieldDropdown,
     snipcartCustomFieldReadonly,
