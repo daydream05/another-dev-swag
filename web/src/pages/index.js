@@ -23,8 +23,6 @@ const IndexPage = ({ data }) => {
     }
   })
 
-  console.log(ogImages)
-
   return (
     <Layout>
       <GatsbySeo
