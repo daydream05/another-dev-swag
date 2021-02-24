@@ -65,7 +65,7 @@ export const HeroWithImage = ({ hero, height }) => {
           <Container
             sx={{
               ml: 0,
-              maxWidth: `450px`,
+              maxWidth: `550px`,
             }}
           >
             <BaseBlockContent
