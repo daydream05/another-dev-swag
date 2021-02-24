@@ -13,7 +13,10 @@
     "@sanity/default-layout",
     "@sanity/default-login",
     "@sanity/desk-tool",
-    "media-library"
+    "media-library",
+    "snipcart-orders",
+    "@sanity/dashboard",
+    "dashboard-widget-document-list"
   ],
   "env": {
     "development": {
@@ -34,6 +37,10 @@
     {
       "implements": "part:@sanity/form-builder/input/image/asset-source",
       "path": "./assetSource.js"
+    },
+    {
+      "implements": "part:@sanity/dashboard/config",
+      "path": "./dashboardConfig.js"
     }
   ]
 }

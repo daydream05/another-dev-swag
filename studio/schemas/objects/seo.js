@@ -1,17 +1,24 @@
 export default {
-  name: 'seo',
-  title: 'SEO',
-  type: 'object',
+  type: "object",
+  name: "seo",
+  title: "SEO",
+  fieldsets: [{ name: "openGraph", title: "Open Graph" }],
   fields: [
     {
-      name: 'title',
-      title: 'Title',
-      type: 'string'
+      title: "Meta Title",
+      name: "metaTitle",
+      type: "string",
     },
     {
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-    }
-  ]
-}
+      title: "Meta Description",
+      name: "metaDescription",
+      type: "text",
+    },
+    {
+      title: "Open Graph Images",
+      name: "ogImages",
+      type: "array",
+      of: [{ type: "figure" }],
+    },
+  ],
+};

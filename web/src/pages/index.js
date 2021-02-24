@@ -5,18 +5,37 @@ import { jsx, Container } from "theme-ui"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
-import SEO from "../components/seo"
 import { HeroWithImage } from "../components/hero-with-image"
 import { mediaQueries } from "../gatsby-plugin-theme-ui/media-queries"
 
 import { ProductCard } from '../components/product-card'
+import { GatsbySeo } from "gatsby-plugin-next-seo"
 
 
 const IndexPage = ({ data }) => {
 
+  const { page } = data
+
+  const ogImages = page?.seo?.ogImages?.map((img) => {
+    return {
+      url: img.asset.url,
+      alt: img.alt,
+    }
+  })
+
+  console.log(ogImages)
+
   return (
     <Layout>
-      <SEO title="Home" />
+      <GatsbySeo
+        title={page?.seo?.metaTitle}
+        description={page?.seo?.metaDescription}
+        openGraph={{
+          title: page?.seo?.metaTitle,
+          description: page?.seo?.metaDescription,
+          images: ogImages,
+        }}
+      />
       <HeroWithImage hero={data?.page?.hero[0]} />
     </Layout>
   )
@@ -91,6 +110,16 @@ export const query = graphql`
           asset {
             _id
           }
+        }
+      }
+      seo {
+        metaTitle
+        metaDescription
+        ogImages {
+          asset {
+            url
+          }
+          alt
         }
       }
     }

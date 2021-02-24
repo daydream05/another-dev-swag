@@ -21,6 +21,11 @@ export default {
       },
     },
     {
+      name: "seo",
+      type: "seo",
+      title: "SEO"
+    },
+    {
       name: "hero",
       title: "Hero",
       type: "array",
