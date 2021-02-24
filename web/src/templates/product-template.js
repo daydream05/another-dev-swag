@@ -132,7 +132,6 @@ const ProductTemplate = ({ data }) => {
     height: 2250,
   }]
 
-
   return (
     <Layout>
       {product && (
@@ -141,6 +140,18 @@ const ProductTemplate = ({ data }) => {
           images={[product.mainImage?.asset?.url]}
           description={plainTextDescription}
           titleTemplate={"%s | SwagaScript"}
+          brand="SwagaScript"
+          sku={product.id}
+          offers={{
+            price: product?.price,
+            priceCurrency: `USD`,
+            itemCondition: `https://schema.org/NewCondition`,
+            availability: `http://schema.org/InStock`,
+            url: `https://swagascript.com${product.path}`,
+            seller: {
+              name: `SwagaScript`
+            }
+          }}
         />
       )}
       {product && (
