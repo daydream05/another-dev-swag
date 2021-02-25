@@ -93,7 +93,7 @@ export const ProductCard = ({ product }) => {
         }}
         to={product.path}
       >
-        Shop now
+        {product?.preOrder ? `Preorder` : `Shop`} now
       </ButtonLink>
     </div>
   )

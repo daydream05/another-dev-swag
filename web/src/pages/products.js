@@ -52,6 +52,7 @@ export const query = graphql`
                 path
                 price
                 isActive
+                preOrder
                 mainImage {
                   alt
                   asset {

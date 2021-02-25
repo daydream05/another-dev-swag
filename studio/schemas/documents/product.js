@@ -32,6 +32,11 @@ export default {
       type: "boolean",
     },
     {
+      name: 'preOrder',
+      title: 'Pre-order',
+      type: 'boolean',
+    },
+    {
       name: "mainImage",
       title: "Main Image",
       type: "mainImage",

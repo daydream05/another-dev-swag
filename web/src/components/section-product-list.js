@@ -48,7 +48,7 @@ export const SectionProductList = ({ section }) => {
           >
             {products.length > 0 &&
               products.map(product => {
-                if (!product.isActive) {
+                if (!product?.isActive) {
                   return null
                 }
                 return (

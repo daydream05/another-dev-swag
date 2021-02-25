@@ -115,6 +115,14 @@ const baseTheme = {
       color: `background`,
       bg: `text`,
     },
+    danger: {
+      bg: `redAlert`,
+      color: `background`,
+    },
+    success: {
+      bg: `greenAccent`,
+      color: `background`,
+    },
   },
   sizes: {
     container: breakpoints.xxxl,

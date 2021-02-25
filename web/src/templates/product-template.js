@@ -30,6 +30,7 @@ export const query = graphql`
       title
       price
       path
+      preOrder
       _rawDescription
       customFields {
         ... on SanitySnipcartCustomFieldDropdown {
@@ -99,13 +100,14 @@ export const query = graphql`
         }
       }
     }
-    moreProducts: allSanityProduct(filter: {id: { ne: $id }, isActive: { eq: true }}, limit: 4) {
+    moreProducts: allSanityProduct(filter: {id: { ne: $id }, isActive: { eq: true }}) {
       edges {
         node {
           id
           title
           price
           path
+          preOrder
           mainImage {
             alt
             asset {
@@ -337,27 +339,29 @@ const ProductInfo = ({ product, className }) => {
           handleFieldChange={handleCfChange}
         />
       )}
-      <SnipCartButton
-        sx={{
-          mt: 4,
-          maxWidth: `unset`,
-        }}
-        data-item-id={product?.id}
-        data-item-price={product?.price}
-        path={product?.path}
-        data-item-image={product?.mainImage?.asset?.url}
-        data-item-name={product?.title}
-        {...customFieldAttributes}
-        {...valueAttributes}
-      >
-        Add to cart
-      </SnipCartButton>
+      {!product?.preOrder && (
+        <SnipCartButton
+          sx={{
+            mt: 4,
+            maxWidth: `unset`,
+          }}
+          data-item-id={product?.id}
+          data-item-price={product?.price}
+          path={product?.path}
+          data-item-image={product?.mainImage?.asset?.url}
+          data-item-name={product?.title}
+          {...customFieldAttributes}
+          {...valueAttributes}
+        >
+          Add to cart
+        </SnipCartButton>
+      )}
       <SnipCartButton
         sx={{
           mt: 2,
           maxWidth: `unset`,
         }}
-        variant="dark"
+        variant={product?.preOrder ? `white` : `dark`}
         className="snipcart-checkout"
         data-item-id={product?.id}
         data-item-price={product?.price}
@@ -367,7 +371,7 @@ const ProductInfo = ({ product, className }) => {
         {...customFieldAttributes}
         {...valueAttributes}
       >
-        Buy now
+        {product?.preOrder ? `Preorder` : `Buy`} now
       </SnipCartButton>
     </div>
   )
