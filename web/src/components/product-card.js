@@ -47,7 +47,7 @@ export const ProductCard = ({ product }) => {
         }}
       >
         <div sx={{ display: `flex`, mb: 3 }}>
-          {!error && data?.stock && (
+          {!error && data?.stock >= 0 && (
             <span
               sx={{ color: `redAlert`, textAlign: `right`, width: `100%` }}
             >{`${data?.stock} left in stock`}</span>
@@ -93,7 +93,7 @@ export const ProductCard = ({ product }) => {
         }}
         to={product.path}
       >
-        {product?.preOrder ? `Preorder` : `Shop`} now
+        {product?.preOrder ? `Learn more` : `Shop now`}
       </ButtonLink>
     </div>
   )

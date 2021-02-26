@@ -3,6 +3,7 @@ import React, { useEffect, useContext } from 'react'
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
 import { SiteContext } from '../context/site-manager'
+import { mediaQueries } from '../gatsby-plugin-theme-ui/media-queries'
 
 export const CartButton = () => {
 
@@ -22,7 +23,7 @@ export const CartButton = () => {
         alignItems: `center`,
       }}
     >
-      <span>Cart</span>
+      <span sx={{ display: `none`, [mediaQueries.md]: { display: `inline-block` } }}>Cart</span>
       <span
         sx={{
           fontSize: 1,

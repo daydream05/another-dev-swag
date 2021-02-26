@@ -26,6 +26,9 @@ export const SectionHeading = ({ heading, className }) => {
           renderContainerOnSingleChild={true}
           sx={{
             textAlign: `center`,
+            p: {
+              mt: 0,
+            }
           }}
         />
       )}
@@ -34,9 +37,9 @@ export const SectionHeading = ({ heading, className }) => {
 }
 
 const serializers = {
-  container: props => <h2 sx={{ textAlign: `center` }}>{props.children}</h2>,
+  container: props => <h2 sx={{ textAlign: `center`, mt: 0, mb: 3 }}>{props.children}</h2>,
   marks: {
-    strong: props => <span sx={{ color: "primary" }}>{props.children}</span>,
+    strong: props => <span sx={{ color: "redAlert" }}>{props.children}</span>,
   },
   types: {
     block(props) {

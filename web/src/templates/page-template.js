@@ -37,56 +37,64 @@ const PageTemplate = ({ data }) => {
 
 export default PageTemplate
 export const query = graphql`
-  query pageTemplateQuery($id: String!) {
-    page: sanityPage(id: { eq: $id }) {
-      hero {
-        _rawContent(resolveReferences: { maxDepth: 5 })
-        mainImage {
-          alt
-          asset {
-            _id
-          }
-        }
-      }
-      seo {
-        metaTitle
-        metaDescription
-        ogImages {
-          asset {
-            url
-          }
-          alt
-        }
-      }
-      sections {
-        ... on SanitySectionProductList {
-          _type
-          _key
-          heading {
-            _rawTitle
-            _rawSubtitle
-          }
-          products {
-            ... on SanityProduct {
-              id
-              title
-              path
-              price
-              isActive
-              preOrder
-              mainImage {
-                alt
-                asset {
-                  _id
-                  fluid(maxWidth: 300, maxHeight: 300) {
-                    ...GatsbySanityImageFluid_noBase64
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
+         query pageTemplateQuery($id: String!) {
+           page: sanityPage(id: { eq: $id }) {
+             hero {
+               _rawContent(resolveReferences: { maxDepth: 5 })
+               mainImage {
+                 alt
+                 asset {
+                   _id
+                 }
+               }
+             }
+             seo {
+               metaTitle
+               metaDescription
+               ogImages {
+                 asset {
+                   url
+                 }
+                 alt
+               }
+             }
+             sections {
+               ... on SanitySectionMailingList {
+                 _type
+                 _key
+                 heading {
+                   _rawTitle
+                   _rawSubtitle
+                 }
+               }
+               ... on SanitySectionProductList {
+                 _type
+                 _key
+                 heading {
+                   _rawTitle
+                   _rawSubtitle
+                 }
+                 products {
+                   ... on SanityProduct {
+                     id
+                     title
+                     path
+                     price
+                     isActive
+                     preOrder
+                     mainImage {
+                       alt
+                       asset {
+                         _id
+                         fluid(maxWidth: 300, maxHeight: 300) {
+                           ...GatsbySanityImageFluid_noBase64
+                         }
+                       }
+                     }
+                   }
+                 }
+               }
+             }
+           }
+         }
+       `

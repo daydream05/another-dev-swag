@@ -4,6 +4,7 @@ import React from 'react'
 import { jsx, Container } from 'theme-ui'
 import { Link } from 'gatsby'
 import { mediaQueries } from '../gatsby-plugin-theme-ui/media-queries'
+import { IoLogoTwitter } from 'react-icons/io'
 
 export const Footer = () => {
   return (

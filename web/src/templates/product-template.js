@@ -20,6 +20,7 @@ import { SiteContext } from '../context/site-manager'
 import { portableTextToPlainText } from '../utils/portableTextToPlainText'
 import { CustomProductFieldSelector } from '../components/custom-product-field-selector'
 import { ProductGallery } from '../components/product-gallery'
+import { ConvertKitSignup } from '../components/convert-kit-signup'
 
 
 
@@ -189,7 +190,6 @@ const ProductTemplate = ({ data }) => {
           <ProductInfo product={product} />
         </Container>
       </section>
-      <MoreProductsSection products={moreProducts?.edges} />
     </Layout>
   )
 }
@@ -318,7 +318,7 @@ const ProductInfo = ({ product, className }) => {
       >
         <span>${price}</span>
         <div sx={{ display: `flex` }}>
-          {!error && data?.stock && (
+          {!error && data?.stock >= 0 && (
             <span
               sx={{ color: `redAlert`, textAlign: `right`, width: `100%` }}
             >{`${data?.stock} left in stock`}</span>
@@ -339,40 +339,56 @@ const ProductInfo = ({ product, className }) => {
           handleFieldChange={handleCfChange}
         />
       )}
-      {!product?.preOrder && (
-        <SnipCartButton
-          sx={{
-            mt: 4,
-            maxWidth: `unset`,
-          }}
-          data-item-id={product?.id}
-          data-item-price={product?.price}
-          path={product?.path}
-          data-item-image={product?.mainImage?.asset?.url}
-          data-item-name={product?.title}
-          {...customFieldAttributes}
-          {...valueAttributes}
-        >
-          Add to cart
-        </SnipCartButton>
+      {product?.preOrder ? (
+        <div>
+          <p>Get updated when this swag drops!</p>
+          <ConvertKitSignup />
+        </div>
+      ) : (
+        <div>
+          {data?.stock !== 0 ? (
+            <div>
+              <SnipCartButton
+                sx={{
+                  mt: 4,
+                  maxWidth: `unset`,
+                }}
+                data-item-id={product?.id}
+                data-item-price={product?.price}
+                path={product?.path}
+                data-item-image={product?.mainImage?.asset?.url}
+                data-item-name={product?.title}
+                {...customFieldAttributes}
+                {...valueAttributes}
+              >
+                Add to cart
+              </SnipCartButton>
+              <SnipCartButton
+                sx={{
+                  mt: 2,
+                  maxWidth: `unset`,
+                }}
+                variant={product?.preOrder ? `white` : `dark`}
+                className="snipcart-checkout"
+                data-item-id={product?.id}
+                data-item-price={product?.price}
+                path={product?.path}
+                data-item-image={product?.mainImage?.asset?.url}
+                data-item-name={product?.title}
+                {...customFieldAttributes}
+                {...valueAttributes}
+              >
+                {product?.preOrder ? `Preorder` : `Buy`} now
+              </SnipCartButton>
+            </div>
+          ) : (
+            <div>
+              <p>Find out when this swag gets another drop!</p>
+              <ConvertKitSignup />
+            </div>
+          )}
+        </div>
       )}
-      <SnipCartButton
-        sx={{
-          mt: 2,
-          maxWidth: `unset`,
-        }}
-        variant={product?.preOrder ? `white` : `dark`}
-        className="snipcart-checkout"
-        data-item-id={product?.id}
-        data-item-price={product?.price}
-        path={product?.path}
-        data-item-image={product?.mainImage?.asset?.url}
-        data-item-name={product?.title}
-        {...customFieldAttributes}
-        {...valueAttributes}
-      >
-        {product?.preOrder ? `Preorder` : `Buy`} now
-      </SnipCartButton>
     </div>
   )
 }

@@ -23,7 +23,7 @@ export default {
     {
       name: "seo",
       type: "seo",
-      title: "SEO"
+      title: "SEO",
     },
     {
       name: "hero",
@@ -35,7 +35,7 @@ export default {
       name: "sections",
       title: "Sections",
       type: "array",
-      of: [{ type: "sectionProductList" }],
+      of: [{ type: "sectionProductList" }, { type: "sectionMailingList" }],
     },
   ],
 };

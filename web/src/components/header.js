@@ -75,6 +75,20 @@ export const Header = ({ siteTitle }) => {
               </Link>
             </li>
             <li>
+              <Link
+                sx={{
+                  fontFamily: `heading`,
+                  fontWeight: `500`,
+                  fontSize: 2,
+                  textDecoration: `none`,
+                  color: `inherit`,
+                }}
+                to="/custom-swag/"
+              >
+                Custom
+              </Link>
+            </li>
+            <li>
               <CartButton />
             </li>
           </ul>

@@ -127,6 +127,8 @@ const createDefaultPages = async (graphql, actions, reporter) => {
     .map(({ node }) => {
       const id = node.id
       const path = node.path
+
+      console.log(path)
       createPage({
         path,
         component: require.resolve(`./src/templates/page-template.js`),
