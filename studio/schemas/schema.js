@@ -32,6 +32,7 @@ import sectionHeading from './objects/sectionHeading'
 import sectionTitle from './blocks/sectionTitle'
 import sectionProductList from './objects/sectionProductList'
 import sectionMailingList from './objects/sectionMailingList'
+import internalLink from './objects/internalLink'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({

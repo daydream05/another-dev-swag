@@ -8,11 +8,14 @@
 import React, { useContext } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+/** @jsx jsx */
+import { jsx, Styled, css } from "theme-ui"
 
 import { Header } from "./header"
 import { Footer } from "./footer"
 import { Banner } from "./banner"
 import { SiteContext } from "../context/site-manager"
+import { constants } from "../gatsby-plugin-theme-ui"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -24,7 +27,7 @@ const Layout = ({ children }) => {
       }
       siteSettings: sanitySiteSettings {
         banner {
-          _rawContent
+          _rawContent(resolveReferences: { maxDepth: 6 })
         }
       }
     }

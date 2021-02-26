@@ -8,6 +8,9 @@
  *    type: 'blockContent'
  *  }
  */
+
+import { HiLink } from "react-icons/hi";
+
 export default {
   title: "Block Banner",
   name: "blockBanner",
@@ -21,9 +24,7 @@ export default {
       // you want and decide how you want to deal with it where you want to
       // use your content.
       lists: [],
-      styles: [
-        { title: "Normal", value: "normal" },
-      ],
+      styles: [{ title: "Normal", value: "normal" }],
       // Marks let you mark up inline text in the block editor.
       marks: {
         // Decorators usually describe a single property – e.g. a typographic
@@ -35,14 +36,30 @@ export default {
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
           {
-            title: "URL",
-            name: "link",
+            title: "Internal Link",
+            name: "internalLink",
             type: "object",
+            blockEditor: {
+              icon: HiLink,
+            },
             fields: [
               {
-                title: "URL",
-                name: "href",
-                type: "url",
+                title: "Open in new tab?",
+                name: "openInNewTab",
+                description: "Read https://css-tricks.com/use-target_blank/",
+                type: "boolean",
+              },
+              {
+                title: "No follow",
+                name: "nofollow",
+                description: "Make this link no follow",
+                type: "boolean",
+              },
+              {
+                title: "Internal Link",
+                name: "internal",
+                type: "reference",
+                to: [{ type: "page" }, { type: "product" }],
               },
             ],
           },
