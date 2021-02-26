@@ -58,6 +58,11 @@ export const Header = ({ siteTitle }) => {
               li: {
                 ml: 2,
               },
+              [mediaQueries.lg]: {
+                li: {
+                  ml: 3,
+                }
+              }
             }}
           >
             <li>
