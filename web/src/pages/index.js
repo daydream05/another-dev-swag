@@ -4,17 +4,19 @@ import { Link, graphql } from "gatsby"
 import { jsx, Container } from "theme-ui"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import { HeroWithImage } from "../components/hero-with-image"
 import { mediaQueries } from "../gatsby-plugin-theme-ui/media-queries"
 
 import { ProductCard } from '../components/product-card'
 import { GatsbySeo } from "gatsby-plugin-next-seo"
 
+import { SectionSelector } from "../components/section-selector"
+
 
 const IndexPage = ({ data }) => {
 
   const { page } = data
+  const { sections } = page
 
   const ogImages = page?.seo?.ogImages?.map((img) => {
     return {
@@ -35,6 +37,10 @@ const IndexPage = ({ data }) => {
         }}
       />
       <HeroWithImage hero={data?.page?.hero[0]} />
+      {sections?.length > 0 &&
+        sections.map(section => {
+          return <SectionSelector section={section} key={section._key} />
+        })}
     </Layout>
   )
 }
@@ -120,20 +126,38 @@ export const query = graphql`
           alt
         }
       }
-    }
-    products: allSanityProduct(filter: {isActive: {eq: true}}) {
-      edges {
-        node {
-          id
-          title
-          path
-          price
-          mainImage {
-            alt
-            asset {
-              _id
-              fluid(maxWidth: 300, maxHeight: 300) {
-                ...GatsbySanityImageFluid_noBase64
+      sections {
+        ... on SanitySectionMailingList {
+          _type
+          _key
+          heading {
+            _rawTitle
+            _rawSubtitle
+          }
+        }
+        ... on SanitySectionProductList {
+          _type
+          _key
+          heading {
+            _rawTitle
+            _rawSubtitle
+          }
+          products {
+            ... on SanityProduct {
+              id
+              title
+              path
+              price
+              isActive
+              preOrder
+              mainImage {
+                alt
+                asset {
+                  _id
+                  fluid(maxWidth: 300, maxHeight: 300) {
+                    ...GatsbySanityImageFluid_noBase64
+                  }
+                }
               }
             }
           }
