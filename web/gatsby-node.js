@@ -120,7 +120,7 @@ const createDefaultPages = async (graphql, actions, reporter) => {
 
   const pageEdges = (result.data.allSanityPage || {}).edges || []
 
-  const hardCodedPages = [`home`, `products`]
+  const hardCodedPages = [`home`]
 
   pageEdges
     .filter(({ node }) => !hardCodedPages.includes(node.slug.current))
