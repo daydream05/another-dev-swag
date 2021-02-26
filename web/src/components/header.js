@@ -74,7 +74,7 @@ export const Header = ({ siteTitle }) => {
                   textDecoration: `none`,
                   color: `inherit`,
                 }}
-                to="/products/"
+                to="/drops/"
               >
                 Drops
               </Link>
