@@ -41,7 +41,13 @@ const Layout = ({ children }) => {
         <Banner banner={data?.siteSettings?.banner} onDismiss={hideBanner} />
       ) : null}
       <Header siteTitle={data.site.siteMetadata.title} />
-      <main>{children}</main>
+      <main
+        sx={{
+          minHeight: `calc(100vh - 220px - ${constants.bannerHeight} - ${constants.headerHeight})`,
+        }}
+      >
+        {children}
+      </main>
       <Footer />
     </>
   )
