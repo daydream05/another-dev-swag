@@ -76,7 +76,7 @@ export const Header = ({ siteTitle }) => {
                 }}
                 to="/products/"
               >
-                Shop
+                Drops
               </Link>
             </li>
             <li>

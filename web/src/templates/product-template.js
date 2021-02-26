@@ -341,7 +341,7 @@ const ProductInfo = ({ product, className }) => {
       )}
       {product?.preOrder ? (
         <div>
-          <p>Get updated when this swag drops!</p>
+          <p>Be the first to know when this swag drops!</p>
           <ConvertKitSignup />
         </div>
       ) : (
