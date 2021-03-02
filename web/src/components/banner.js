@@ -68,6 +68,7 @@ export const Banner = ({ banner, onDismiss }) => {
               bg: `unset`,
               color: `white`,
               fontSize: 5,
+              padding: 0,
             }}
             onClick={onDismiss}
           >

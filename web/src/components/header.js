@@ -55,6 +55,7 @@ export const Header = ({ siteTitle }) => {
               display: `flex`,
               listStyle: `none`,
               alignItems: `center`,
+              padding: 0,
               li: {
                 ml: 2,
               },
