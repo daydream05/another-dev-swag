@@ -21,6 +21,7 @@ export const CartButton = () => {
         display: `flex`,
         justifyContent: `center`,
         alignItems: `center`,
+        padding: 0,
       }}
     >
       <span
