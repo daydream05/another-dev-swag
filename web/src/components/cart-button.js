@@ -23,7 +23,6 @@ export const CartButton = () => {
         alignItems: `center`,
       }}
     >
-      <span sx={{ display: `none`, [mediaQueries.md]: { display: `inline-block` } }}>Cart</span>
       <span
         sx={{
           fontSize: 1,
