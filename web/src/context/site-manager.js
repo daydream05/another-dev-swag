@@ -24,7 +24,7 @@ export const SiteProvider = ({ children }) => {
   useEffect(() => {
     let defaultCount = 0
     defaultCount = window?.localStorage?.getItem(`cartCount`)
-    setCartCount(defaultCount)
+    setCartCount(parseInt(defaultCount))
   }, [])
 
   useEffect(() => {
