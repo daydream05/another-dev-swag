@@ -34,9 +34,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingIds: [
-          "G-6XY3EEPRT0"
-        ],
+        trackingIds: ["G-6XY3EEPRT0"],
         gtagConfig: {
           optimize_id: "OPT_CONTAINER_ID",
           anonymize_ip: true,
@@ -73,15 +71,18 @@ module.exports = {
         // To enable preview of drafts, copy .env-example into .env,
         // and add a token with read permissions
         token: process.env.SANITY_TOKEN,
-        watchMode: true,
-        overlayDrafts: true,
+        watchMode: activeEnv === "development",
+        overlayDrafts: activeEnv === "development",
       },
     },
     {
       resolve: `gatsby-plugin-snipcart-advanced`,
       options: {
         version: "3.0.30",
-        publicApiKey: activeEnv ===  "development" ? process.env.GATSBY_SNIPCART_API_KEY_TEST : process.env.GATSBY_SNIPCART_API_KEY_PRODUCTION, // use public api key here or in environment variable
+        publicApiKey:
+          activeEnv === "development"
+            ? process.env.GATSBY_SNIPCART_API_KEY_TEST
+            : process.env.GATSBY_SNIPCART_API_KEY_PRODUCTION, // use public api key here or in environment variable
         openCartOnAdd: true,
       },
     },
