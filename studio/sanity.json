@@ -13,7 +13,6 @@
     "@sanity/default-layout",
     "@sanity/default-login",
     "@sanity/desk-tool",
-    "media-library",
     "snipcart-orders",
     "@sanity/dashboard",
     "dashboard-widget-document-list"
@@ -33,10 +32,6 @@
     {
       "name": "part:@sanity/desk-tool/structure",
       "path": "./deskStructure.js"
-    },
-    {
-      "implements": "part:@sanity/form-builder/input/image/asset-source",
-      "path": "./assetSource.js"
     },
     {
       "implements": "part:@sanity/dashboard/config",
